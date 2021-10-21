@@ -61,7 +61,8 @@ export default {
     },
 
     completedSignUp: function(data) {
-      
+      alert("Registro Exitoso");
+      this.completedLogIn(data);
     },
     created: function(){
     this.verifyAuth()
