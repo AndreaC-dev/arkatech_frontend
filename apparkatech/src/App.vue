@@ -1,13 +1,11 @@
 <template>
   <div id="app" class="app">
-
   <div class="header">
       <h1 class="justify-content">Arkatech</h1>
   <nav>
     <form class="form-inline justify-content">
   <button class="left" v-on:click="loadHome">Inicio</button>
-  <button class="left">Categorías</button>
-  <button class="left">Quienes somos</button>
+  <button class="left" v-on:click="loadCatalogo">Catálogo</button>
   <button class= "left" v-if="is_auth" v-on:click="logOut"> Cerrar Sesión</button>
       <input class="form-control mr-sm-2" type="search" placeholder="Qué estás buscando" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -16,91 +14,37 @@
   </form>
   </nav>
   </div>
+
   <div class="main-component">
       <router-view
+      v-on:loadHome="loadHome"
+      v-on:loadCatalogo="loadCatalogo"
       v-on:completedLogIn="completedLogIn"
       v-on:completedSignUp="completedSignUp"
       v-on:logOut="logOut"
       >
       </router-view>
-    </div>
-  </div>
-  <body>
 
-    <h2 class="Subtitulo">Catalogo</h2>
-    <div class="mitad">
-      <div class="mitad1">
-        <div class="productos">
-                <h4>Producto 1</h4>
-                <img class ="imagen" src="https://www.crucial.mx/content/dam/crucial/dram-products/ballistix-max-udimm/images/product/crucial-ballistix-max-and-rgb-offset-stacked-front-flat-image.psd.transform/small-png/img.png" >
-                <div>
-                <button class="Botones">Ver Producto</button>
-               <button class="Botones">Comprar </button>
-               </div>
-        </div>
-            <div class="productos">
-                <h4>Producto 2</h4>
-                <img class ="imagen" src="https://www.informaticapalafrugell.com/image/cache/data/TF4D416G3600HC18JDC01_1-500x400.jpg" >
-                <div>
-                <button class="Botones">Ver Producto</button>
-               <button class="Botones">Comprar </button>
-               </div>
-            </div>
-                 <div class="productos">
-                   <h4>Producto 3</h4>
-                <img class ="imagen" src="https://http2.mlstatic.com/D_NQ_NP_857500-MCO44367548563_122020-O.jpg" >
-                <div>
-                <button class="Botones">Ver Producto</button>
-               <button class="Botones">Comprar </button>
-               </div>
-               </div>
-              
-        </div>
-       <div class="mitad2">
-        
-             <div class="productos">
-                <h4>Producto 4</h4>
-                <img class ="imagen" src="https://exitocol.vtexassets.com/arquivos/ids/8850441/memoria-ram-gamer-8gb-hyperx-fury-black-ddr4-3600-dimm-pc.jpg?v=637611825387470000" >
-                <div>
-                <button class="Botones">Ver Producto</button>
-               <button class="Botones">Comprar </button>
-               </div>
-               </div>
-            <div class="productos">
-                <h4>Producto 5</h4>
-                <img class ="imagen" src="https://www.profesionalreview.com/wp-content/uploads/2017/11/Disipador-para-memorias-Jonsbo-NC-1-2.jpg" >
-                <div>
-                <button class="Botones">Ver Producto</button>
-               <button class="Botones">Comprar </button>
-               </div></div>
-                 <div class="productos">
-                   <h4>Producto 6</h4>
-                <img class ="imagen" src="https://recursos.mps.com.co/images/Productos/AX4U320016G16A-ST41.jpg" >
-                <div>
-                <button class="Botones">Ver Producto</button>
-               <button class="Botones">Comprar </button>
-               </div>
-               </div>
-        </div>
-    </div>  
-  </body>
+    </div>
   <footer class="footer"> Copyright @2021 Arkatech. Todos los derechos reservados
  <br>
   Desarrollado por: Andrea Cardenas, Alejandro Carmona, David Nuñez, Diego Sánchez, José Rondón, Willinton Ascancio
   </footer>
+    </div>
 </template>
 <script>
+import Catalogo from './components/Catalogo.vue'
 export default {
   name: 'App',
-
- 
+  components: {
+  Catalogo
+},
   data: function(){
     return{
       is_auth: false
     }
   },
-components: {
-},
+
 methods:{
   verifyAuth: function() {
     this.is_auth = localStorage.getItem("isAuth") || false;
@@ -123,7 +67,9 @@ methods:{
      alert("Autenticación Exitosa");
      this.verifyAuth();
    },
-   
+   loadCatalogo: function(){
+       this.$router.push({name: "catalogo"})
+   },
    completedSignUp: function(data) {
      alert("REgistro Exitoso");
      this.completedLogIn(data);
@@ -136,12 +82,8 @@ methods:{
      alert("Sesion Cerrada");
      this.verifyAuth();
    },
- },
- 
-  
+ }, 
  }
-
-
 </script>
 
 <style>
@@ -184,7 +126,7 @@ margin-left :10px;
 text-align:left;
 margin-left :5px;
 margin-right :5px;
-background-color: #69737E; 
+background-color: #283747; 
 color:white;
 height: 30px;
 border-radius: 10%;
