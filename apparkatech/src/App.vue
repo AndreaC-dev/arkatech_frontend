@@ -11,9 +11,14 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         <button id="login">Ingresar</button>
   <button id="signup">Registrarse</button>
+  <button v-on:click="loadProductDetail" id="prodetail">Producto detalle</button>
   </form>
   </nav>
   </div>
+  <div class="main-component">
+    <router-view>
+    </router-view>
+    </div> 
   </div>
   <body></body>
   <footer class="footer">
@@ -22,6 +27,29 @@
   Desarrollado por: Andrea Cardenas, Alejandro Carmona, David Nuñez, Diego Sánchez, José Rondón, Willinton Ascancio
   </footer>
 </template>
+
+<script>
+export default {
+  name: 'App',
+
+  data: function(){
+    return{
+      }
+  },
+
+  components: {
+  },
+
+  methods:{
+    loadProductDetail: function(){
+      this.$router.push({name: "productDetail"})
+    },
+  },
+
+  created: function(){
+  }
+}
+</script>
 
 <style>
 footer {
@@ -55,7 +83,7 @@ border-radius: 10%;
 width: 150px;}
 
 
-#signup,#login {
+#signup,#login,#prodetail {
 text-align:right;
 margin-left :5px;
 margin-right :5px;
