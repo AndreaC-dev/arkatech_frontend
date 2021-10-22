@@ -15,7 +15,7 @@ name: "logIn",
 component: LogIn
 },
 {
-path: '/user/signUp',
+path: '/user/SignUp',
 name: "signUp",
 component: SignUp
 },
