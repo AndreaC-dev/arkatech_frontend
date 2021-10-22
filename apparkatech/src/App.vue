@@ -40,9 +40,13 @@ export default {
   Catalogo
 },
   data: function(){
-    return{
+    console.log(localStorage.getItem("isAuth"))
+    if(localStorage.getItem("isAuth") == true)
+      return{is_auth: true};
+    else
+      return{
       is_auth: false
-    }
+    };
   },
 
 methods:{
@@ -71,7 +75,7 @@ methods:{
        this.$router.push({name: "catalogo"})
    },
    completedSignUp: function(data) {
-     alert("REgistro Exitoso");
+     alert("Registro Exitoso");
      this.completedLogIn(data);
    },
    loadHome: function() {

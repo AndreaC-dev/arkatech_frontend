@@ -7,7 +7,7 @@
             <form  class="form" v-on:submit.prevent="processSignUp" >
             <div class="container_signUp_user_left">
 
-                <p class="text_user">Usuario</p>
+                <p class="text_user">Nombre</p>
                 <input type="text" v-model="user.nombre" >
                 <br>
                 <p class="text_user">Contraseña</p>
@@ -23,7 +23,7 @@
             </div>
             <div class="container_signUp_user_right">
 
-                <p class="text_user">Nombre</p>
+                <p class="text_user">Apellido</p>
                 <input type="text" v-model="user.apellido" >
                 <br>
                 <p class="text_user">Email</p>
