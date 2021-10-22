@@ -1,20 +1,17 @@
   <template>
-  <body>
-
-    <h2 class="Subtitulo">Catalogo</h2>
-    <div v-for="product in products" :key="product.id">
-    <div class="mitad">
-      <div class="mitad1">
-        <div class="productos">
-                <h4>{{product.nombre}}</h4>          
-                <img v-bind:src="product.imagen" v-bind:alt="product.nombre"/>
-                <button class="Botones"  v-on:click="loadProductDetail">Ver Producto</button>
-               <button class="Botones">Comprar </button>
-               </div>
+  <div class="container-fluid">
+        <h2 class="Subtitulo">Catálogo</h2>
+        <div class="row p-2">
+        <div class="card" v-for="product in products" :key="product.id" style="width: 18rem;">
+        <h5 class="card-title text-center">{{product.nombre}}</h5>
+        <img class="card-img-top" v-bind:src="product.imagen" v-bind:alt="product.nombre"/>
+        <div class="card-body">
+        <button class="Botones"  v-on:click="loadProductDetail(product.id)" >Ver Producto</button>
+        <button class="Botones">Comprar </button>
         </div>
         </div>
-    </div>  
-  </body>
+        </div>
+        </div>
   </template>
 <script>
 import axios from 'axios';
@@ -24,12 +21,14 @@ export default{
 
     data: function(){
         return{
-          products:[]
+          products:[],
+          product:0
         }
     },
     methods:{
-      loadProductDetail: function(){
-      this.$router.push({name: "productDetail"})
+      loadProductDetail: function(id){
+      console.log(id)
+      this.$router.push({name: "productDetail", params: { id: id }})
     },
     },
     created(){
@@ -45,3 +44,14 @@ export default{
     },
 }
 </script>
+<style scoped>
+ .img-fluid {
+    width: 250px;
+    height: 200px;
+    background-color:white;
+    justify-content: center;
+  }
+  .products{
+    text-align: center;
+  }
+</style>
