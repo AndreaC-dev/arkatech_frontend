@@ -4,11 +4,11 @@ import App from './App.vue';
 import LogIn from './components/LogIn.vue'
 import SignUp from './components/SignUp.vue'
 import Home from './components/Home.vue'
+import Catalogo from './components/Catalogo.vue'
 const routes = [{
   path: '/',
   name: 'root',
-  component: App
-},
+  component: Catalogo},
 {
 path: '/user/logIn',
 name: "logIn",
@@ -23,7 +23,12 @@ component: SignUp
   path: '/user/home',
   name: "home",
   component: Home
-}
+},
+{
+path: '/catalogo',
+name: "catalogo",
+component: Catalogo
+},
 ];
 const router = createRouter({
 
