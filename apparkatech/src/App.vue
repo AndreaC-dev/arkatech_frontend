@@ -11,6 +11,7 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         <button id="login" v-if="!is_auth" v-on:click="loadLogIn">Ingresar</button>
       <button id="signup" v-if="!is_auth" v-on:click="loadSignUp">Registrarse</button>
+      <button v-on:click="loadProductDetail" id="prodetail">Producto detalle</button>
   </form>
   </nav>
   </div>
@@ -86,6 +87,9 @@ methods:{
      alert("Sesion Cerrada");
      this.verifyAuth();
    },
+       loadProductDetail: function(){
+      this.$router.push({name: "productDetail"})
+    },
  }, 
  }
 </script>
@@ -137,7 +141,7 @@ border-radius: 10%;
 width: 150px;}
 
 
-#signup,#login {
+#signup,#login,#prodetail {
 text-align:right;
 margin-left :5px;
 margin-right :5px;

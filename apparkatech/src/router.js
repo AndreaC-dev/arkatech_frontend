@@ -5,6 +5,7 @@ import LogIn from './components/LogIn.vue'
 import SignUp from './components/SignUp.vue'
 import Home from './components/Home.vue'
 import Catalogo from './components/Catalogo.vue'
+import ProductDetail from './components/ProductDetail.vue'
 const routes = [{
   path: '/',
   name: 'root',
@@ -29,6 +30,11 @@ path: '/catalogo',
 name: "catalogo",
 component: Catalogo
 },
+  {
+    path: '/product/productDetail',
+    name: 'productDetail',
+    component: ProductDetail
+  },
 ];
 const router = createRouter({
 
