@@ -1,20 +1,19 @@
 <template>
 <div class="container_nombre">
-    <h2>Memoria ram 3600 mhz</h2>
+    <h2>{{nombre}}</h2>
 </div>
   <div class="ProductDetail">
-      
       <div class="container_imagen">
-          <img src="https://m.media-amazon.com/images/I/81032KFrq9L._AC_SL1500_.jpg">
+          <img src="">
       </div>
       <div class="container_text">
           <div class="container_titulo">
               <h3>Detalles</h3>
               </div>
-          <h4>Descripcion: Dos modulos de 8 GB marca Corsair, rgb, ddr4.</h4>
-          <h4>Valor: 450000 COP.</h4>
-          <h4>Iva: 85500 COP.</h4>
-          <h4>Total: 535500 COP.</h4>
+          <h4>Descripcion: <span>{{descripcion}}</span></h4>
+          <h4>Valor: <span>{{valor}}</span> COP.</h4>
+          <h4>Iva: <span>{{iva}}</span> COP.</h4>
+          <h4>Total: <span>{{imagen}}</span> COP.</h4>
           <div class="container_button">
               <button id="comprar">Comprar</button>
           </div>
@@ -30,43 +29,28 @@ import axios from 'axios';
 export default {
     name: "ProductDetail",
 
-    data: function(){
+    data (){
         return {
-            id: "",
-            nombre: "",
-            marca: "",
-            valor: 0,
-            descripcion: "",
-            iva: 0,
-            imagen: "",
-            inventario: 0
-        }
-    },
+                nombre:"",
+                imagen:"",
+                valor:"",
+                descripcion:"",
+                iva:""
+            }
+        },
 
-    methods: {
-        getData: async function(){
-            console.log("ingresando a la funcion");
-            axios.get('http://127.0.0.1:8000/product/3/')
-            .then((result) => {
-                 alert("datos guardados");
-                 this.id = result.data.id;
-                 this.nombre = result.data.nombre;
-                 this.marca = result.data.marca;
-                 this.valor = result.data.valor;
-                 this.descripcion = result.data.descripcion;
-                 this.iva = result.data.iva;
-                 this.imagen = result.data.imagen;
-                 console.log(result)
+    mounted(){
+        let vue= this;
+        console.log("ingresando a la funcion");
+        axios.get('http://127.0.0.1:8000/product/1/')
+        .then(function(response) {
+            vue.nombre = response.data.nombre;
+            vue.imagen = response.data.imagen;
+            vue.valor = response.data.precioUnitario;
+            vue.descripcion = response.data.descripcion;
+            vue.iva = response.data.iva;
+            console.log(vue);
             })
-            
-        },
-        mounted(){
-            console.log("Esto se carga auto");
-        },
-        created: async function(){
-            console.log("ingresando a la funcion");
-            this.getData();
-        },
     }
 
 }
@@ -105,7 +89,7 @@ flex-direction:row;
 }
 .container_imagen img{
     width: 90%;
-    height: 330px;
+    height: 10%px;
     display: block;
     }
 .container_titulo{
