@@ -11,8 +11,8 @@
   <button class= "left" v-if="is_auth" v-on:click="logOut"> Cerrar Sesión</button>
       <input class="form-control mr-sm-2" type="search" placeholder="Qué estás buscando" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        <button id="login">Ingresar</button>
-  <button id="signup">Registrarse</button>
+        <button id="login" v-if="!is_auth" v-on:click="loadLogIn">Ingresar</button>
+      <button id="signup" v-if="!is_auth" v-on:click="loadSignUp">Registrarse</button>
   </form>
   </nav>
   </div>
@@ -80,11 +80,11 @@ methods:{
      this.verifyAuth();
    },
  },
- created: function(){
-  this.verifyAuth()
+ 
+  
  }
 
-}
+
 </script>
 
 <style>
