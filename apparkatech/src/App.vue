@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="app">
+
   <div class="header">
       <h1 class="justify-content">Arkatech</h1>
   <nav>
@@ -23,11 +24,10 @@
       >
       </router-view>
     </div>
-
   </div>
   <body></body>
   <footer class="footer">
-  Copyright @2021 Arkatech. Todos los derechos reservados
+    <p>Copyright @2021 Arkatech. Todos los derechos reservados</p>
   <br>
   Desarrollado por: Andrea Cardenas, Alejandro Carmona, David Nuñez, Diego Sánchez, José Rondón, Wilinton Ascanio
   </footer>
@@ -35,6 +35,7 @@
 <script>
 export default {
   name: 'App',
+
  
   data: function(){
     return{
@@ -82,6 +83,7 @@ methods:{
  created: function(){
   this.verifyAuth()
  }
+
 }
 </script>
 
