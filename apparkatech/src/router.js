@@ -31,7 +31,7 @@ name: "catalogo",
 component: Catalogo
 },
   {
-    path: '/product/productDetail',
+    path: '/product/:id/',
     name: 'productDetail',
     component: ProductDetail
   },

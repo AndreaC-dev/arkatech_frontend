@@ -1,27 +1,36 @@
 <template>
-<div class="container_nombre">
-    <h2>Memoria ram 3600 mhz</h2>
-</div>
-  <div class="ProductDetail">
-      
-      <div class="container_imagen">
-          <img src="https://m.media-amazon.com/images/I/81032KFrq9L._AC_SL1500_.jpg">
-      </div>
-      <div class="container_text">
-          <div class="container_titulo">
-              <h3>Detalles</h3>
-              </div>
-          <h4>Descripcion: Dos modulos de 8 GB marca Corsair, rgb, ddr4.</h4>
-          <h4>Valor: 450000 COP.</h4>
-          <h4>Iva: 85500 COP.</h4>
-          <h4>Total: 535500 COP.</h4>
-          <div class="container_button">
-              <button id="comprar">Comprar</button>
-          </div>
-        </div>
-
+  <div id="productDetail">
+<div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 offset-lg-2 offset-md-1 float-md-center">
+  <div class="jumbotron">
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+    <img class="card-img-top" v-bind:src="producto.imagen" v-bind:alt="producto.nombre"/>
     </div>
-
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{producto.nombre}}</h5>
+        <div class="col">
+      <dl>
+        <dt class="bold">Description</dt>
+        <dd id="description">{{producto.descripcion}}</dd>
+      </dl><br>
+      <dl>
+        <dt>Valor</dt>
+        <dd id="valor">{{producto.precioUnitario}}</dd>
+      </dl><br>
+      <dl>
+        <dt class="bold">Iva</dt>
+        <dd id="description">{{producto.iva}}</dd>
+      </dl><hr>
+    </div>
+      </div>
+    </div>
+        </div>
+  </div>
+        </div>
+                </div>
+  </div>
 </template>
 
 <script>
@@ -29,47 +38,25 @@ import axios from 'axios';
 
 export default {
     name: "ProductDetail",
+    data(){
 
-    data: function(){
         return {
-            id: "",
-            nombre: "",
-            marca: "",
-            valor: 0,
-            descripcion: "",
-            iva: 0,
-            imagen: "",
-            inventario: 0
-        }
-    },
+              id:this.$route.params.id,
+              producto:{}
+            }
+        },
+      created(){
+        axios.get(`http://127.0.0.1:8000/product/${this.id}/`)
+          .then((response)=>{
+            this.producto = response.data
+              })
+                      .catch((error)=>{
+            console.log(error);
+            if (error.response.status = "404")
+            alert("Error 404: No hay productos");})
+      },
+      }
 
-    methods: {
-        getData: async function(){
-            console.log("ingresando a la funcion");
-            axios.get('http://127.0.0.1:8000/product/3/')
-            .then((result) => {
-                 alert("datos guardados");
-                 this.id = result.data.id;
-                 this.nombre = result.data.nombre;
-                 this.marca = result.data.marca;
-                 this.valor = result.data.valor;
-                 this.descripcion = result.data.descripcion;
-                 this.iva = result.data.iva;
-                 this.imagen = result.data.imagen;
-                 console.log(result)
-            })
-            
-        },
-        mounted(){
-            console.log("Esto se carga auto");
-        },
-        created: async function(){
-            console.log("ingresando a la funcion");
-            this.getData();
-        },
-    }
-
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -78,7 +65,7 @@ export default {
     float: left;
     margin-left: 1%;
     }
-.ProductDetail {
+.Product {
 margin: 0;
 padding: 0%;
 height: 100%;
@@ -105,7 +92,7 @@ flex-direction:row;
 }
 .container_imagen img{
     width: 90%;
-    height: 330px;
+    height: 10%px;
     display: block;
     }
 .container_titulo{
