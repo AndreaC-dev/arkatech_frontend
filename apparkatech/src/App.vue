@@ -1,100 +1,198 @@
 <template>
   <div id="app" class="app">
-  <div class="header">
-      <h1 class="justify-content">Arkatech</h1>
-  <nav>
-    <form class="form-inline justify-content">
-  <button class="left" v-on:click="loadHome">Inicio</button>
-  <button class="left" v-on:click="loadCatalogo">Catálogo</button>
-  <button class= "left" v-if="is_auth" v-on:click="logOut"> Cerrar Sesión</button>
-      <input class="form-control mr-sm-2" type="search" placeholder="Qué estás buscando" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        <button id="login" v-if="!is_auth" v-on:click="loadLogIn">Ingresar</button>
-      <button id="signup" v-if="!is_auth" v-on:click="loadSignUp">Registrarse</button>
-      <button v-on:click="loadProductDetail" id="prodetail">Producto detalle</button>
-  </form>
-  </nav>
-  </div>
-
-  <div class="main-component">
+    <div class="container">
+      <div class="navbar">
+        <h1 style="margin-left: 3%">ARKATECH</h1>
+        <ul>
+          <li><a href="" v-on:click="loadHome"> Inicio </a></li>
+          <li><a href="" v-on:click="loadCatalogo"> Catálogo </a></li>
+          <li v-if="is_auth">
+            <form>
+              <div>
+                <input
+                  type="search"
+                  style="padding: 5px; border-radius: 20px"
+                />
+                <button class="search">Search</button>
+              </div>
+            </form>
+          </li>
+        </ul>
+        <div v-if="is_auth">
+          <ul style="">
+            <li><a href="" v-on:click="logOut"> Cerrar Sesión </a></li>
+          </ul>
+        </div>
+        <div v-else>
+          <ul>
+            <li><a href="" v-on:click="loadLogIn"> Ingresar </a></li>
+            <li><a href="" v-on:click="loadSignUp"> Registrarme </a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <p>Copyright @2021 Arkatech. Todos los derechos reservados</p>
+      <br />
+      Desarrollado por: Andrea Cardenas, Alejandro Carmona, David Nuñez, Diego
+      Sánchez, José Rondón, Wilinton Ascanio, Jimilgton Soto
+    </footer>
+    <div class="main-component">
       <router-view
-      v-on:loadHome="loadHome"
-      v-on:loadCatalogo="loadCatalogo"
-      v-on:completedLogIn="completedLogIn"
-      v-on:completedSignUp="completedSignUp"
-      v-on:logOut="logOut"
+        v-on:loadHome="loadHome"
+        v-on:loadCatalogo="loadCatalogo"
+        v-on:completedLogIn="completedLogIn"
+        v-on:completedSignUp="completedSignUp"
+        v-on:logOut="logOut"
       >
       </router-view>
-
     </div>
-  <footer class="footer"> Copyright @2021 Arkatech. Todos los derechos reservados
- <br>
-  Desarrollado por: Andrea Cardenas, Alejandro Carmona, David Nuñez, Diego Sánchez, José Rondón, Willinton Ascancio
-  </footer>
-    </div>
+  </div>
 </template>
 <script>
-import Catalogo from './components/Catalogo.vue'
+import Catalogo from "./components/Catalogo.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-  Catalogo
-},
-  data: function(){
-    console.log(localStorage.getItem("isAuth"))
-    if(localStorage.getItem("isAuth") == true)
-      return{is_auth: true};
+    Catalogo,
+  },
+  data: function () {
+    console.log(localStorage.getItem("isAuth"));
+    if (localStorage.getItem("isAuth") == true) return { is_auth: true };
     else
-      return{
-      is_auth: false
-    };
+      return {
+        is_auth: false,
+      };
   },
 
-methods:{
-  verifyAuth: function() {
-    this.is_auth = localStorage.getItem("isAuth") || false;
-    if(this.is_auth == false)
-    this.$router.push({name: "logIn"});
-    else
-     this.$router.push({ name: "home"});
-  },
-  loadLogIn: function(){
-    this.$router.push({name: "logIn"})
-  },
-  loadSignUp: function(){
-    this.$router.push({name: "signUp"})
-   },
-   completedLogIn: function(data) {
-     localStorage.setItem("isAuth", true);
-     localStorage.setItem("username", data.username);
-     localStorage.setItem("token_access", data.token_access);
-     localStorage.setItem("token_refresh", data.token_refresh);
-     alert("Autenticación Exitosa");
-     this.verifyAuth();
-   },
-   loadCatalogo: function(){
-       this.$router.push({name: "catalogo"})
-   },
-   completedSignUp: function(data) {
-     alert("Registro Exitoso");
-     this.completedLogIn(data);
-   },
-   loadHome: function() {
-     this.$router.push({ name: "home"});
-   },
-   logOut: function(){
-     localStorage.clear();
-     alert("Sesion Cerrada");
-     this.verifyAuth();
-   },
-       loadProductDetail: function(){
-      this.$router.push({name: "productDetail"})
+  methods: {
+    verifyAuth: function () {
+      this.is_auth = localStorage.getItem("isAuth") || false;
+      if (this.is_auth == false) this.$router.push({ name: "logIn" });
+      else this.$router.push({ name: "home" });
     },
- }, 
- }
+    loadLogIn: function () {
+      this.$router.push({ name: "logIn" });
+    },
+    loadSignUp: function () {
+      this.$router.push({ name: "signUp" });
+    },
+    completedLogIn: function (data) {
+      localStorage.setItem("isAuth", true);
+      localStorage.setItem("username", data.username);
+      localStorage.setItem("token_access", data.token_access);
+      localStorage.setItem("token_refresh", data.token_refresh);
+      alert("Autenticación Exitosa");
+      this.verifyAuth();
+    },
+    loadCatalogo: function () {
+      this.$router.push({ name: "catalogo" });
+    },
+    completedSignUp: function (data) {
+      alert("Registro Exitoso");
+      this.completedLogIn(data);
+    },
+    loadHome: function () {
+      this.$router.push({ name: "home" });
+    },
+    logOut: function () {
+      localStorage.clear();
+      alert("Sesion Cerrada");
+      this.verifyAuth();
+    },
+    loadProductDetail: function () {
+      this.$router.push({ name: "productDetail" });
+    },
+  },
+};
 </script>
 
 <style>
+:root {
+  --white-light: rgba(255, 255, 255, 0.5);
+  --alice-blue: #f8f9fa;
+  --carribean-green: #40c9a2;
+  --gray: #ededed;
+}
+
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  margin: 0;
+  margin-bottom: 40px;
+}
+
+footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color:#1e917afd;
+  color: white;
+  text-align: center;
+  font-family: sans-serif;
+  padding: 20px 0;
+}
+
+.container {
+  width: 100%;
+  height: auto;
+  background-color:#1e917afd;
+}
+
+.navbar {
+  width: 85%;
+  margin: auto;
+  padding: 25px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 130px;
+  cursor: pointer;
+}
+
+.navbar ul li {
+  list-style: none;
+  display: inline-block;
+  margin: 0 20px;
+  position: relative;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: white;
+  font-family: Roboto, "sans-serif";
+  font-size: 1.2rem;
+}
+
+.navbar ul li::before {
+  content: "";
+  height: 3px;
+  width: 0%;
+  background: yellowgreen;
+  position: absolute;
+  left: 0;
+  bottom: -12px;
+  transition: 0.4s ease-out;
+}
+
+.navbar ul li:hover::before {
+  width: 100%;
+}
+
+.search {
+  margin-left: 1vw;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+/*
 footer {
   position: fixed;
   left: 0;
@@ -241,8 +339,6 @@ border-radius: 10px;
   background-color: red;
   border-radius: 50px;
   margin-top: 50%;
-}  
-
-
-
+} 
+*/
 </style>
