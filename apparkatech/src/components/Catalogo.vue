@@ -2,7 +2,7 @@
   <body>
     <div class="products">
       <div class="products-container">
-        <h1 class="lg-title">Special Shoes With Offers</h1>
+        <h1 class="lg-title">Catálogo</h1>
         <div class="product-items">
           <!-- single product -->
           <div v-for="product in products" :key="product.id" class="product">
@@ -164,6 +164,7 @@ img {
   margin-top: 1.4rem;
   opacity: 0;
   transition: opacity 0.6s ease;
+  font-size: 0.8rem;
 }
 .btn-view,
 .btn-buy {
