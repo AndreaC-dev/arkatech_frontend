@@ -52,13 +52,11 @@
     </div>-->
   </body>
 </template>
-
 <script>
 import axios from "axios";
 
 export default {
   name: "Catalogo",
-
   data: function () {
     return {
       products: [],
@@ -280,82 +278,4 @@ img {
     height: 121.5vh;
   }
 }
-/*body {
-  background: #ebe0e4;
-}
-
-.justify-content {
-  color: black;
-}
-
-.mitad {
-  height: 690px;
-  width: 100%px;
-  background: rgb(196, 173, 173);
-  padding: 10px 10px 0 10px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-.mitad1 {
-  height: 690px;
-  width: 100%px;
-  background: rgb(196, 173, 173);
-  padding: 10px 10px 0 10px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: center;
-}
-
-.mitad2 {
-  height: 690px;
-  width: 100%px;
-  background: rgb(196, 173, 173);
-  padding: 10px 10px 0 10px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: center;
-}
-
-.productos {
-  font-family: sans-serif;
-  height: 310px;
-  width: 530px;
-  background: rgb(255, 255, 255);
-  border-radius: 5px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  margin-right: 50px;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  border: 2px solid black;
-}
-
-.imagen {
-  height: 55%;
-  width: 55%;
-  margin: top 10px;
-  margin-bottom: 15px;
-  margin-left: 20%;
-  margin-right: 20%;
-}
-
-.Botones {
-  background-color: rgba(31, 187, 140, 0.932);
-  border-radius: 10px;
-}
-
-.Botones button {
-  background-color: red;
-  border-radius: 50px;
-  margin-top: 50%;
-}*/
 </style>
