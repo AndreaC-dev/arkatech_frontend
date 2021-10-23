@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="app">
-    <div class="container">
+    <div class="container_navbar">
       <div class="navbar">
         <h1 style="margin-left: 3%">ARKATECH</h1>
         <ul>
@@ -64,6 +64,7 @@ export default {
         is_auth: false,
       };
   },
+
   methods: {
     verifyAuth: function () {
       this.is_auth = localStorage.getItem("isAuth") || false;
@@ -129,17 +130,17 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color:#1e917afd;
+  background-color: #1e917afd;
   color: white;
   text-align: center;
   font-family: sans-serif;
   padding: 20px 0;
 }
 
-.container {
+.container_navbar {
   width: 100%;
   height: auto;
-  background-color:#1e917afd;
+  background-color: #1e917afd;
 }
 
 .navbar {
