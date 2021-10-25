@@ -10,7 +10,7 @@
           <input
             type="text"
             class="form-input"
-            placeholder="enter your full name"
+            placeholder="Ingresa tu nombre"
             required="required"
             v-model="user.nombre"
           />
@@ -21,7 +21,7 @@
             type="text"
             v-model="user.apellido"
             class="form-input"
-            placeholder="enter your last name"
+            placeholder="ingresa tu apellido"
             required
           />
         </div>
@@ -32,40 +32,51 @@
           type="email"
           v-model="user.email"
           class="form-input"
-          placeholder="enter your email"
+          placeholder="Ingresa tu Email"
           required="required"
         />
       </div>
       <div class="horizontal-group">
         <div class="form-group left">
-          <label for="password" class="label-title">Password *</label>
+          <label for="password" class="label-title">Contraseña *</label>
           <input
             type="password"
             v-model="user.password"
             class="form-input"
-            placeholder="enter your password"
+            placeholder="Ingresa una contraseña"
             required="required"
           />
         </div>
 
         <div class="form-group right">
           <label for="confirm-password" class="label-title"
-            >Confirm Password *</label
+            >Confirma tu contraseña *</label
           >
           <input
             type="password"
             class="form-input"
             v-model="user.confirmPassword"
-            placeholder="enter your password again"
+            placeholder="Confirma tu contraseña"
             required="required"
           />
-        </div>
+          
+        
+        </div> 
+         
       </div>
+      
     </div>
+    <div class="form-prefooter left">
+         <span>*campos obligatorios</span>
+     </div> 
     <div class="form-footer">
-      <span>* required</span>
-      <button type="submit" class="btn">Registrarme</button>
+        
+        <button type="reset" class="cancel_btn">Cancelar</button>
+        <button type="submit" class="btn">Registrarme</button>
+        
     </div>
+    
+    
   </form>
 </template>
 
@@ -144,6 +155,7 @@ var txt_confirm_password =document.getElementById("confirm_password")
   color: #666;
   padding: 20px 0;
   border-bottom: 1px solid #cccccc;
+  font-weight: bold;
 }
 
 .form-body {
@@ -155,6 +167,7 @@ var txt_confirm_password =document.getElementById("confirm_password")
 .form-group {
   margin-bottom: 20px;
 }
+
 
 .form-body .label-title {
   color: #1bba93;
@@ -187,6 +200,7 @@ var txt_confirm_password =document.getElementById("confirm_password")
   width: 49%;
 }
 
+
 input[type="file"] {
   outline: none;
   cursor: pointer;
@@ -207,7 +221,20 @@ input[type="file"] {
 ::-webkit-input-placeholder {
   color: #d9d9d9;
 }
-
+.form-prefooter {
+  margin-bottom: 10px;
+  
+  display: flex;
+  justify-content:left;
+  clear: both;
+}
+.form-prefooter span {
+  float: left;
+  font-weight: bold;
+  color: #999;
+  font-style: italic;
+  font-weight: thin;
+}
 .form-footer {
   clear: both;
 }
@@ -217,7 +244,8 @@ input[type="file"] {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   padding: 10px 40px;
-  text-align: right;
+  display: flex;
+  justify-content: space-evenly;
   border-top: 1px solid #cccccc;
 }
 
@@ -236,7 +264,18 @@ input[type="file"] {
   font-size: 17px;
   border: none;
   border-radius: 5px;
-  color: #bcf5e7;
+  color:white;
+  cursor: pointer;
+}
+.cancel_btn {
+  display: inline-block;
+  padding: 10px 20px;
+ 
+  background-color: #C84968;
+  font-size: 17px;
+  border: none;
+  border-radius: 5px;
+  color:white;
   cursor: pointer;
 }
 
@@ -244,4 +283,13 @@ input[type="file"] {
   background-color: #169c7b;
   color: white;
 }
+.cancel_btn:hover {
+  background-color: #82132E;
+  color: white;
+}
+left-btn {
+  text-align: left;
+}
+
+
 </style> 

@@ -11,9 +11,10 @@
               <div>
                 <input
                   type="search"
-                  style="padding: 5px; border-radius: 20px"
+                  class="search-bar"
+                  placeholder="Ingresa el número de tu orden de compra"
                 />
-                <button class="search">Search</button>
+                <button class="search-btn" v-on:click="loadInvoice">Search</button>
               </div>
             </form>
           </li>
@@ -41,6 +42,7 @@
       <router-view
         v-on:loadHome="loadHome"
         v-on:loadCatalogo="loadCatalogo"
+        v-on:loadInvoice ="loadInvoice"
         v-on:completedLogIn="completedLogIn"
         v-on:completedSignUp="completedSignUp"
         v-on:logOut="logOut"
@@ -91,6 +93,9 @@ export default {
     completedSignUp: function (data) {
       alert("Registro Exitoso");
       this.completedLogIn(data);
+    },
+    loadInvoice: function () {
+      this.$router.push({ name: "invoice" });
     },
     loadHome: function () {
       this.$router.push({ name: "home" });
@@ -186,9 +191,33 @@ footer {
   width: 100%;
 }
 
-.search {
-  margin-left: 1vw;
+.search-btn {
+ 
+ 
+  border-right-color: #629AB2;
+  border-top-color: #629AB2;
+  border-bottom-color: #629AB2;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-width: 3px;
+  font: helvetica;
+}
+.search-bar{
+  border: none;
+  
+  
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  height: 30px;
+  width: 600px  
+}
+.search-bar placeholder{
   padding: 5px;
-  border-radius: 10px;
+  float: left;
+  margin-top: 10px;
+  color: #999;
+  font-style: italic;
+  font-weight: thin;
+
 }
 </style>
