@@ -18,10 +18,17 @@
         <h3>{{ producto.inventario }}</h3>
       </div>
       <div class="product-price">
-        <span> Precio: {{ new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 2}).format(producto.precioUnitario) }} </span>
+        <span> Precio: {{ new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 2}).format(producto.precioUnitario+producto.iva)}} 
+          <span id="s1"><small>*iva incluido</small></span> 
+        </span>
       </div>
+      <div class="form-group">
+        <label>Cantidad</label>
+        <input type="quantiy" placeholder="1" class="form-control quantity">
+      </div>
+      <br>
       <center>
-        <a href="" class="cart-btn">Comprar</a>
+        <a href="" class="cart-btn" v-on:click="loadLogIn">Comprar</a>
         <a href="" class="return" v-on:click="loadCatalogo">Regresar</a>
       </center>
     </div>
@@ -40,6 +47,9 @@ export default {
     };
   },
   methods: {
+    loadLogIn: function(){
+      this.$router.push({name: "logIn"})
+    },
     loadCatalogo: function () {
       this.$router.push({ name: "catalogo"});
     },
@@ -74,7 +84,7 @@ body {
   margin: 0 auto;
   padding: 15px;
   display: flex;
-    margin-bottom: 20px;
+  margin-bottom: 20px;
   border-bottom: 1px solid #E1E8EE;
 }
 .left-column {
@@ -85,6 +95,8 @@ body {
 .right-column {
   width: 35%;
   margin-top: 60px;
+  align-items: center;
+  justify-content: center;
 }
 .left-column img {
   width: 100%;
@@ -138,7 +150,7 @@ body {
 
 .product-price {
   display: flex;
-  align-items: center;
+  align-items: column;
 }
  
 .product-price span {
@@ -148,7 +160,11 @@ body {
   text-transform: uppercase;
   text-decoration: none;
 }
+ .product-price s1 {
+  font-size: 40px;
+  color: #1f3f58;
  
+}
 .cart-btn {
   display: inline-block;
   background-color: #7DC855;
