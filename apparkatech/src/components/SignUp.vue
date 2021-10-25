@@ -1,5 +1,7 @@
 <template>
-  <form class="signup-form" action v-on:submit.prevent="processSignUp">
+<div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 offset-lg-2 offset-md-1 float-md-center">
+  <body>
+  <form class="form-group" action v-on:submit.prevent="processSignUp">
     <div class="form-header">
       <h1>Registrar Usuario</h1>
     </div>
@@ -61,12 +63,15 @@
           />
         </div>
       </div>
+      <div class="form-footer end">
+      <label>* required</label>
+      <button type="submit" class="btn btn-success">Registrarme</button>
+      <button class="btn btn-danger return" v-on:click="loadCatalogo">Regresar</button>
     </div>
-    <div class="form-footer">
-      <span>* required</span>
-      <button type="submit" class="btn">Registrarme</button>
     </div>
   </form>
+  </body>
+</div>
 </template>
 
 <script type="text/javascript">
@@ -106,6 +111,9 @@ export default {
             alert("ErroR en el resgistro.");
           });
       }
+    },
+        loadCatalogo: function () {
+      this.$router.push({ name: "catalogo"});
     },
   },
 };
@@ -152,9 +160,6 @@ var txt_confirm_password =document.getElementById("confirm_password")
   color: #666;
 }
 
-.form-group {
-  margin-bottom: 20px;
-}
 
 .form-body .label-title {
   color: #1bba93;
@@ -210,6 +215,7 @@ input[type="file"] {
 
 .form-footer {
   clear: both;
+  float: right;
 }
 
 .signup-form .form-footer {
@@ -221,27 +227,27 @@ input[type="file"] {
   border-top: 1px solid #cccccc;
 }
 
-.form-footer span {
+.form-footer label {
   float: left;
   margin-top: 10px;
+  margin-right: 10px;
   color: #999;
   font-style: italic;
   font-weight: thin;
 }
 
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
+.success{
   background-color: #1bba93;
-  font-size: 17px;
-  border: none;
-  border-radius: 5px;
-  color: #bcf5e7;
-  cursor: pointer;
+}
+.return{
+  margin-left: 20px;
 }
 
 .btn:hover {
-  background-color: #169c7b;
   color: white;
 }
+body{
+  margin-bottom: 300px;
+}
+
 </style> 

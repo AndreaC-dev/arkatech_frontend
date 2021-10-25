@@ -1,5 +1,7 @@
 <template>
-  <main class="container">
+<body>
+      <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 offset-lg-2 offset-md-1 float-md-center">
+  <div class="container">
     <div class="left-column">
       <img
         class="active"
@@ -9,30 +11,35 @@
     </div>
     <div class="right-column">
       <div class="product-description">
-        <span> {{ producto.marca }} </span>
+        <h3> {{ producto.marca }} </h3>
         <h1>{{ producto.nombre }}</h1>
         <p>{{ producto.descripcion }}</p>
       </div>
       <div class="stock">
-        <span>Stock</span>
-        <h3>{{ producto.inventario }}</h3>
+        <h3>Stock</h3>
+        <p>{{ producto.inventario }}</p>
       </div>
       <div class="product-price">
-        <span> Precio: {{ new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 2}).format(producto.precioUnitario+producto.iva)}} 
-          <span id="s1"><small>*iva incluido</small></span> 
-        </span>
+        <div>
+          <h3>Precio:</h3>
+          <p class="price"> {{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 2}).format(producto.precioUnitario+producto.iva)}} 
+          </p>
+        <p id="s1"><small>*iva incluido</small></p> 
+        </div>
       </div>
       <div class="form-group">
-        <label>Cantidad</label>
+        <h3>Cantidad</h3>
         <input type="quantiy" placeholder="1" class="form-control quantity">
       </div>
       <br>
-      <center>
-        <a href="" class="cart-btn" v-on:click="loadLogIn">Comprar</a>
-        <a href="" class="return" v-on:click="loadCatalogo">Regresar</a>
-      </center>
+      <div class="justify-center">
+        <button class="cart-btn" v-on:click="loadLogIn">Comprar</button>
+        <button class="return" v-on:click="loadCatalogo">Regresar</button>
+      </div>
     </div>
-  </main>
+      </div>
+  </div>
+</body>
 </template>
 
 <script>
@@ -77,6 +84,7 @@ body {
   width: 100%;
   margin: 0;
   font-family: "Roboto", sans-serif;
+  margin-bottom: 90px;
 }
 
 .container {
@@ -94,13 +102,13 @@ body {
 
 .right-column {
   width: 35%;
-  margin-top: 60px;
   align-items: center;
   justify-content: center;
 }
 .left-column img {
-  width: 100%;
-  position: absolute;
+  display:flex;
+  height:80%;
+  width:80%;
   left: 0;
   top: 0;
   opacity: 0;
@@ -148,26 +156,14 @@ body {
   text-decoration: none;
 }
 
-.product-price {
-  display: flex;
+.price {
+  font-size: 120%;
   align-items: column;
 }
  
-.product-price span {
-  font-size: 40px;
-  color: #1f3f58;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-decoration: none;
-}
- .product-price s1 {
-  font-size: 40px;
-  color: #1f3f58;
- 
-}
 .cart-btn {
   display: inline-block;
-  background-color: #7DC855;
+  background-color: #28a745;
   border-radius: 6px;
   font-size: 16px;
   color: #FFFFFF;
@@ -176,12 +172,12 @@ body {
   transition: all .5s;
 }
 .cart-btn:hover {
-  background-color: #64af3d;
+  background-color: #2a6908;
 }
 .return {
   margin-left: 2vh;
   display: inline-block;
-  background-color: #a85218;
+  background-color: red;
   border-radius: 6px;
   font-size: 16px;
   color: #FFFFFF;
@@ -191,5 +187,12 @@ body {
 }
 .return:hover {
   background-color: #bd1913;
+}
+h3{
+  font-size: 12px;
+  color: #358ED7;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 </style>

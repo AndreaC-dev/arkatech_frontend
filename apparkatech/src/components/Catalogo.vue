@@ -1,5 +1,6 @@
   <template>
   <body>
+    <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 offset-lg-2 offset-md-1 float-md-center">
     <div class="products">
       <div class="products-container">
         <h1 class="lg-title">Catálogo</h1>
@@ -7,7 +8,7 @@
           <div v-for="product in products" :key="product.id" class="product">
             <div class="product-content">
               <div class="product-img">
-                <img v-bind:src="product.imagen" v-bind:alt="product.nombre" />
+                <img v-bind:src="product.imagen" v-bind:alt="product.nombre" v-on:click="loadProductDetail(product.id)"/>
               </div>
               <div class="product-btns">
                 <button
@@ -38,6 +39,7 @@
         </div>
       </div>
     </div>
+        </div>
   </body>
 </template>
 <script>
@@ -126,7 +128,6 @@ img {
 /* product section */
 .products {
   background: var(--alice-blue);
-  padding: 3.2rem 0;
 }
 
 .product {
@@ -142,13 +143,14 @@ img {
   background: var(--white-light);
   box-shadow: 0 0 20px 10px var(--white-light);
   width: 200px;
-  height: 200px;
+  height: 150px;
   margin: 0 auto;
   border-radius: 50%;
   transition: background 0.5s ease;
 }
 .product-btns {
   display: flex;
+  position:absolute;
   justify-content: center;
   margin-top: 1.4rem;
   opacity: 0;

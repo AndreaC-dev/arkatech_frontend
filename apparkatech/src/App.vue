@@ -68,6 +68,7 @@
         v-on:completedLogIn="completedLogIn"
         v-on:completedSignUp="completedSignUp"
         v-on:logOut="logOut"
+        v-on:loadProductDetail="productDetail"
       >
       </router-view>
     </div>
@@ -161,13 +162,8 @@ html {
   position: relative;
 }
 
-body {
-  margin: 0;
-  margin-bottom: 40px;
-}
-
 footer {
-  position: absolute;
+  position:absolute;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -182,12 +178,12 @@ footer {
   width: 100%;
   height: auto;
   background-color: #1e917afd;
+  position: relative;
 }
 
 .navbar {
   width: 85%;
   margin: auto;
-  padding: 25px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
