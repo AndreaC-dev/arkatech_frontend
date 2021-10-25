@@ -22,6 +22,7 @@
       </div>
       <center>
         <a href="" class="cart-btn">Comprar</a>
+        <a href="" class="return" v-on:click="loadCatalogo">Regresar</a>
       </center>
     </div>
   </main>
@@ -37,6 +38,11 @@ export default {
       id: this.$route.params.id,
       producto: {},
     };
+  },
+  methods: {
+    loadCatalogo: function () {
+      this.$router.push({ name: "catalogo"});
+    },
   },
   created() {
     axios
@@ -155,5 +161,19 @@ body {
 }
 .cart-btn:hover {
   background-color: #64af3d;
+}
+.return {
+  margin-left: 2vh;
+  display: inline-block;
+  background-color: #a85218;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 12px 30px;
+  transition: all .5s;
+}
+.return:hover {
+  background-color: #bd1913;
 }
 </style>
