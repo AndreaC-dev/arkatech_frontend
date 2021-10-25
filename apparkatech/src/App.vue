@@ -1,62 +1,65 @@
 <template>
   <div id="app" class="app">
     <div class="container_navbar">
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <h1 class>Arkatech</h1>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <h1 class>Arkatech</h1>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" v-on:click="loadHome">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" v-on:click="loadCatalogo">Catálogo</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <div class="box">
-            <div class="container-1">
-              <span class="icon"><i class="fa fa-search"></i></span>
-              <input type="search" id="search" placeholder="Que estás buscando..." />
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" v-on:click="loadHome">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-on:click="loadCatalogo">Catálogo</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <div class="box">
+              <div class="container-1">
+                <span class="icon"><i class="fa fa-search"></i></span>
+                <input
+                  type="search"
+                  id="search"
+                  placeholder="Que estás buscando..."
+                />
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
 
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a
-              class="nav-link"
-              id="login"
-              v-if="!is_auth"
-              v-on:click="loadLogIn"
-              >Ingresar</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" v-if="!is_auth" v-on:click="loadSignUp"
-              >Registrarse</a
-            >
-        
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" v-if="is_auth" v-on:click="logOut">
-              Cerrar Sesión</a
-            >
-          </li>
-        </ul>
-      </div>
-    </nav>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a
+                class="nav-link"
+                id="login"
+                v-if="!is_auth"
+                v-on:click="loadLogIn"
+                >Ingresar</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-if="!is_auth" v-on:click="loadSignUp"
+                >Registrarse</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-if="is_auth" v-on:click="logOut">
+                Cerrar Sesión</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
     </div>
     <div class="main-component">
       <router-view
@@ -85,20 +88,26 @@ export default {
   },
   data: function () {
     console.log(localStorage.getItem("isAuth"));
-    if (localStorage.getItem("isAuth") == true) return { is_auth: true };
+    if (localStorage.getItem("isAuth")) return { is_auth: true };
     else
       return {
         is_auth: false,
       };
   },
   mounted() {
-      let recaptchaScriptQuery = document.createElement('script')
-      recaptchaScriptQuery.setAttribute('src', 'https://code.jquery.com/jquery-3.5.1.slim.min.js')
-      document.head.appendChild(recaptchaScriptQuery)
-      let recaptchaScriptBootstrap = document.createElement('script')
-      recaptchaScriptBootstrap.setAttribute('src', 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js')
-      document.head.appendChild(recaptchaScriptBootstrap)
-    },
+    let recaptchaScriptQuery = document.createElement("script");
+    recaptchaScriptQuery.setAttribute(
+      "src",
+      "https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    );
+    document.head.appendChild(recaptchaScriptQuery);
+    let recaptchaScriptBootstrap = document.createElement("script");
+    recaptchaScriptBootstrap.setAttribute(
+      "src",
+      "https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    );
+    document.head.appendChild(recaptchaScriptBootstrap);
+  },
   methods: {
     verifyAuth: function () {
       this.is_auth = localStorage.getItem("isAuth") || false;
