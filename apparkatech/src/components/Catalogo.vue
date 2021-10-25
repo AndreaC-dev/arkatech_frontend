@@ -4,19 +4,22 @@
       <div class="products-container">
         <h1 class="lg-title">Catálogo</h1>
         <div class="product-items">
-          <!-- single product -->
           <div v-for="product in products" :key="product.id" class="product">
             <div class="product-content">
               <div class="product-img">
                 <img v-bind:src="product.imagen" v-bind:alt="product.nombre" />
               </div>
               <div class="product-btns">
-                <button type="button" class="btn-view" v-on:click="loadProductDetail">
-                  View Product
+                <button
+                  type="button"
+                  class="btn-view"
+                  v-on:click="loadProductDetail(product.id)"
+                >
+                  Ver Producto
                   <span><i class="fas fa-plus"></i></span>
                 </button>
                 <button type="button" class="btn-buy">
-                  buy now
+                  Comprar
                   <span><i class="fas fa-shopping-cart"></i></span>
                 </button>
               </div>
@@ -35,43 +38,29 @@
         </div>
       </div>
     </div>
-    <!--<h2 class="Subtitulo">Catalogo</h2>
-    <div v-for="product in products" :key="product.id">
-      <div class="mitad">
-        <div class="mitad1">
-          <div class="productos">
-            <h4>{{ product.nombre }}</h4>
-            <img v-bind:src="product.imagen" v-bind:alt="product.nombre" />
-            <button class="Botones" v-on:click="loadProductDetail">
-              Ver Producto
-            </button>
-            <button class="Botones">Comprar</button>
-          </div>
-        </div>
-      </div>
-    </div>-->
   </body>
 </template>
 <script>
 import axios from "axios";
-
 export default {
   name: "Catalogo",
   data: function () {
     return {
       products: [],
+      product: 0,
     };
   },
-   mounted() {
+  methods: {
+    loadProductDetail: function (id) {
+      console.log(id);
+      this.$router.push({ name: "productDetail", params: { id: id } });
+    },
+  },
+  mounted() {
       let recaptchaScript = document.createElement('script')
       recaptchaScript.setAttribute('src', 'https://kit.fontawesome.com/dbed6b6114.js', 'crossorigin', 'anonymous')
       document.head.appendChild(recaptchaScript)
     },
-  methods: {
-    loadProductDetail: function () {
-      this.$router.push({ name: "productDetail" });
-    },
-  },
   created() {
     axios
       .get("http://127.0.0.1:8000/viewproduct/")
