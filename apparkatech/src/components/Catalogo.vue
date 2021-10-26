@@ -28,7 +28,7 @@
 
             <div class="product-info">
               <a href="#" class="product-name">{{ product.nombre }}</a>
-              <p class="product-price">${{ product.precioUnitario }}</p>
+              <p class="product-price">${{ product.precioUnitario+product.iva }}</p>
               <!-- <p class="product-price">$ 133.00</p> -->
             </div>
             <!-- Producto contine descuento 
@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-        </div>
+  </div>
   </body>
 </template>
 <script>
@@ -89,6 +89,8 @@ export default {
 }
 body {
   font-family: "Quicksand", sans-serif;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Utility stylings */
@@ -97,9 +99,11 @@ img {
   display: block;
 }
 .products-container {
-  width: 88vw;
+  
   margin: 0 auto;
-  margin-bottom: 50px;
+  align-items: center;
+  justify-content: center;
+  
 }
 .lg-title,
 .md-title,
@@ -128,6 +132,8 @@ img {
 /* product section */
 .products {
   background: var(--alice-blue);
+  align-items: center;
+  justify-content: center;
 }
 
 .product {
@@ -136,23 +142,40 @@ img {
 }
 .product-content {
   background: var(--gray);
-  padding: 3rem 0.5rem 2rem 0.5rem;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  
 }
+.product-items{
+  align-items: center;
+  justify-content: center;
+  
+
+}
+
 .product-img {
   background: var(--white-light);
   box-shadow: 0 0 20px 10px var(--white-light);
-  width: 200px;
+  width: 150px;
   height: 150px;
   margin: 0 auto;
   border-radius: 50%;
   transition: background 0.5s ease;
+  align-items: center;
+  justify-content: center;
+}
+.product-img img {
+  width: 150px;
+  height: 150px;
+  transition: transform 0.6s ease;
 }
 .product-btns {
   display: flex;
-  position:absolute;
+  
+  align-items: center;
   justify-content: center;
-  margin-top: 1.4rem;
+  margin-top: 1rem;
   opacity: 0;
   transition: opacity 0.6s ease;
   font-size: 0.8rem;
@@ -185,7 +208,7 @@ img {
 }
 .product-info {
   background: white;
-  padding: 2rem;
+  
 }
 .product-name {
   color: black;
@@ -204,9 +227,7 @@ img {
   text-decoration: line-through;
   color: var(--carribean-green);
 }*/
-.product-img img {
-  transition: transform 0.6s ease;
-}
+
 .product:hover .product-img img {
   transform: scale(1.5);
 }
@@ -245,6 +266,8 @@ img {
 @media screen and (min-width: 1200px) {
   .product-items {
     grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: center;
   }
   .product {
     margin-right: 1rem;

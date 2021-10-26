@@ -132,6 +132,9 @@ var txt_confirm_password =document.getElementById("confirm_password")
 
 <style>
 @import url("httpss://fonts.googleapis.com/css?family=Roboto");
+body{
+ 
+}
 .signup-form {
   font-family: "Roboto", sans-serif;
   width: 650px;
@@ -246,8 +249,6 @@ input[type="file"] {
 .btn:hover {
   color: white;
 }
-body{
-  margin-bottom: 300px;
-}
+
 
 </style> 
