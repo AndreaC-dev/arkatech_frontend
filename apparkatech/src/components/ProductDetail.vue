@@ -1,5 +1,7 @@
 <template>
-  <main class="container">
+<body>
+  <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 offset-lg-2 offset-md-1 float-md-center">
+  <div class="container">
     <div class="left-column">
       <img
         class="active"
@@ -9,23 +11,35 @@
     </div>
     <div class="right-column">
       <div class="product-description">
-        <span> {{ producto.marca }} </span>
+        <h3> {{ producto.marca }} </h3>
         <h1>{{ producto.nombre }}</h1>
         <p>{{ producto.descripcion }}</p>
       </div>
       <div class="stock">
-        <span>Stock</span>
-        <h3>{{ producto.inventario }}</h3>
+        <h3>Stock</h3>
+        <p>{{ producto.inventario }}</p>
       </div>
       <div class="product-price">
-        <span> Precio: {{ new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 2}).format(producto.precioUnitario) }} </span>
+        <div>
+          <h3>Precio:</h3>
+          <p class="price"> {{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 2}).format(producto.precioUnitario+producto.iva)}} 
+          </p>
+        <p id="s1"><small>*iva incluido</small></p> 
+        </div>
       </div>
-      <center>
-        <a href="" class="cart-btn">Comprar</a>
-        <a href="" class="return" v-on:click="loadCatalogo">Regresar</a>
-      </center>
+      <div class="form-group">
+        <h3>Cantidad</h3>
+        <input type="quantiy" placeholder="1" class="form-control quantity">
+      </div>
+      <br>
+      <div class="justify-center col-2">
+        <button class="cart-btn me-1" v-on:click="loadLogIn">Comprar</button>
+        <button class="return me-1 me-1" v-on:click="loadCatalogo">Regresar</button>
+      </div>
     </div>
-  </main>
+      </div>
+  </div>
+</body>
 </template>
 
 <script>
@@ -40,6 +54,9 @@ export default {
     };
   },
   methods: {
+    loadLogIn: function(){
+      this.$router.push({name: "logIn"})
+    },
     loadCatalogo: function () {
       this.$router.push({ name: "catalogo"});
     },
@@ -67,6 +84,7 @@ body {
   width: 100%;
   margin: 0;
   font-family: "Roboto", sans-serif;
+  margin-bottom: 90px;
 }
 
 .container {
@@ -74,7 +92,7 @@ body {
   margin: 0 auto;
   padding: 15px;
   display: flex;
-    margin-bottom: 20px;
+  margin-bottom: 20px;
   border-bottom: 1px solid #E1E8EE;
 }
 .left-column {
@@ -84,11 +102,13 @@ body {
 
 .right-column {
   width: 35%;
-  margin-top: 60px;
+  align-items: center;
+  justify-content: center;
 }
 .left-column img {
-  width: 100%;
-  position: absolute;
+  display:flex;
+  height:80%;
+  width:80%;
   left: 0;
   top: 0;
   opacity: 0;
@@ -136,22 +156,14 @@ body {
   text-decoration: none;
 }
 
-.product-price {
-  display: flex;
-  align-items: center;
-}
- 
-.product-price span {
-  font-size: 40px;
-  color: #1f3f58;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-decoration: none;
+.price {
+  font-size: 120%;
+  align-items: column;
 }
  
 .cart-btn {
-  display: inline-block;
-  background-color: #7DC855;
+  float: left;
+  background-color: #28a745;
   border-radius: 6px;
   font-size: 16px;
   color: #FFFFFF;
@@ -160,12 +172,12 @@ body {
   transition: all .5s;
 }
 .cart-btn:hover {
-  background-color: #64af3d;
+  background-color: #2a6908;
 }
 .return {
   margin-left: 2vh;
-  display: inline-block;
-  background-color: #a85218;
+  float:right;
+  background-color: red;
   border-radius: 6px;
   font-size: 16px;
   color: #FFFFFF;
@@ -175,5 +187,52 @@ body {
 }
 .return:hover {
   background-color: #bd1913;
+}
+h3{
+  font-size: 12px;
+  color: #358ED7;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+@media only screen and (max-width: 400px) {
+  .left-column img.active {
+    height:200px
+    
+  }
+  .product-description p{
+    font-size: 10px !important;
+  }
+  .product-price p{
+    font-size: 15px !important;
+  }
+  .product-description h1{
+    font-size: 30px;
+  }
+  .cart-btn {
+    display: inline;
+  float:right;
+  background-color: #28a745;
+  font-size: 10px;
+  color: #FFFFFF;
+
+  transition: all .5s;
+  text-align: center;
+
+}
+.cart-btn:hover {
+  background-color: #2a6908;
+}
+.return {
+  display: inline;
+  float:left;
+  background-color: red;
+  font-size: 10px;
+  color: #FFFFFF;
+  transition: all .5s;
+}
+.container{
+  margin-bottom: 150px;
+}
 }
 </style>
