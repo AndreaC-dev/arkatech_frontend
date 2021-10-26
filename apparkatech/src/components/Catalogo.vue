@@ -1,22 +1,26 @@
   <template>
   <body>
+    <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 offset-lg-2 offset-md-1 float-md-center">
     <div class="products">
       <div class="products-container">
         <h1 class="lg-title">Catálogo</h1>
         <div class="product-items">
-          <!-- single product -->
           <div v-for="product in products" :key="product.id" class="product">
             <div class="product-content">
               <div class="product-img">
-                <img v-bind:src="product.imagen" v-bind:alt="product.nombre" />
+                <img v-bind:src="product.imagen" v-bind:alt="product.nombre" v-on:click="loadProductDetail(product.id)"/>
               </div>
               <div class="product-btns">
-                <button type="button" class="btn-view" v-on:click="loadProductDetail">
-                  View Product
+                <button
+                  type="button"
+                  class="btn-view"
+                  v-on:click="loadProductDetail(product.id)"
+                >
+                  Ver Producto
                   <span><i class="fas fa-plus"></i></span>
                 </button>
                 <button type="button" class="btn-buy">
-                  buy now
+                  Comprar
                   <span><i class="fas fa-shopping-cart"></i></span>
                 </button>
               </div>
@@ -24,54 +28,36 @@
 
             <div class="product-info">
               <a href="#" class="product-name">{{ product.nombre }}</a>
-              <p class="product-price">${{ product.precioUnitario }}</p>
-              <!-- <p class="product-price">$ 133.00</p> -->
+              <p class="product-price"> {{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 2}).format(product.precioUnitario+product.iva )}}</p>
             </div>
-            <!-- Producto contine descuento 
-            <div class="off-info">
-              <h2 class="sm-title">25% off</h2>
-            </div> -->
           </div>
         </div>
       </div>
     </div>
-    <!--<h2 class="Subtitulo">Catalogo</h2>
-    <div v-for="product in products" :key="product.id">
-      <div class="mitad">
-        <div class="mitad1">
-          <div class="productos">
-            <h4>{{ product.nombre }}</h4>
-            <img v-bind:src="product.imagen" v-bind:alt="product.nombre" />
-            <button class="Botones" v-on:click="loadProductDetail">
-              Ver Producto
-            </button>
-            <button class="Botones">Comprar</button>
-          </div>
-        </div>
-      </div>
-    </div>-->
+  </div>
   </body>
 </template>
 <script>
 import axios from "axios";
-
 export default {
   name: "Catalogo",
   data: function () {
     return {
       products: [],
+      product: 0,
     };
   },
-   mounted() {
+  methods: {
+    loadProductDetail: function (id) {
+      console.log(id);
+      this.$router.push({ name: "productDetail", params: { id: id } });
+    },
+  },
+  mounted() {
       let recaptchaScript = document.createElement('script')
       recaptchaScript.setAttribute('src', 'https://kit.fontawesome.com/dbed6b6114.js', 'crossorigin', 'anonymous')
       document.head.appendChild(recaptchaScript)
     },
-  methods: {
-    loadProductDetail: function () {
-      this.$router.push({ name: "productDetail" });
-    },
-  },
   created() {
     axios
       .get("http://127.0.0.1:8000/viewproduct/")
@@ -98,6 +84,8 @@ export default {
 }
 body {
   font-family: "Quicksand", sans-serif;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Utility stylings */
@@ -106,9 +94,11 @@ img {
   display: block;
 }
 .products-container {
-  width: 88vw;
+  
   margin: 0 auto;
-  margin-bottom: 50px;
+  align-items: center;
+  justify-content: center;
+  
 }
 .lg-title,
 .md-title,
@@ -137,7 +127,8 @@ img {
 /* product section */
 .products {
   background: var(--alice-blue);
-  padding: 3.2rem 0;
+  align-items: center;
+  justify-content: center;
 }
 
 .product {
@@ -146,22 +137,41 @@ img {
 }
 .product-content {
   background: var(--gray);
-  padding: 3rem 0.5rem 2rem 0.5rem;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  
 }
+.product-items{
+  align-items: center;
+  justify-content: center;
+  
+
+}
+
 .product-img {
   background: var(--white-light);
   box-shadow: 0 0 20px 10px var(--white-light);
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   margin: 0 auto;
   border-radius: 50%;
-  transition: background 0.5s ease;
+  transition: background 0.3s ease;
+  align-items: center;
+  justify-content: center;
+}
+.product-img img {
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  transition: transform 0.6s ease;
 }
 .product-btns {
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin-top: 1.4rem;
+  margin-top: 1rem;
   opacity: 0;
   transition: opacity 0.6s ease;
   font-size: 0.8rem;
@@ -194,7 +204,7 @@ img {
 }
 .product-info {
   background: white;
-  padding: 2rem;
+  
 }
 .product-name {
   color: black;
@@ -213,9 +223,7 @@ img {
   text-decoration: line-through;
   color: var(--carribean-green);
 }*/
-.product-img img {
-  transition: transform 0.6s ease;
-}
+
 .product:hover .product-img img {
   transform: scale(1.5);
 }
@@ -254,6 +262,8 @@ img {
 @media screen and (min-width: 1200px) {
   .product-items {
     grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: center;
   }
   .product {
     margin-right: 1rem;
@@ -278,5 +288,11 @@ img {
   .product-col-left {
     height: 121.5vh;
   }
+}
+@media only screen and (max-width: 400px) {
+ 
+.products{
+  margin-bottom: 170px;
+}
 }
 </style>

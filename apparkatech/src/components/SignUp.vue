@@ -1,5 +1,7 @@
 <template>
-  <form class="signup-form" action v-on:submit.prevent="processSignUp">
+<div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 offset-lg-2 offset-md-1 float-md-center">
+  <body>
+  <form class="form-group" action v-on:submit.prevent="processSignUp">
     <div class="form-header">
       <h1>Registrar Usuario</h1>
     </div>
@@ -10,7 +12,7 @@
           <input
             type="text"
             class="form-input"
-            placeholder="Ingresa tu nombre"
+            placeholder="Enter your first name"
             required="required"
             v-model="user.nombre"
           />
@@ -21,7 +23,7 @@
             type="text"
             v-model="user.apellido"
             class="form-input"
-            placeholder="ingresa tu apellido"
+            placeholder="Enter your last name"
             required
           />
         </div>
@@ -32,7 +34,7 @@
           type="email"
           v-model="user.email"
           class="form-input"
-          placeholder="Ingresa tu Email"
+          placeholder="Enter your email"
           required="required"
         />
       </div>
@@ -43,7 +45,7 @@
             type="password"
             v-model="user.password"
             class="form-input"
-            placeholder="Ingresa una contraseña"
+            placeholder="Enter your password"
             required="required"
           />
         </div>
@@ -56,7 +58,7 @@
             type="password"
             class="form-input"
             v-model="user.confirmPassword"
-            placeholder="Confirma tu contraseña"
+            placeholder="Confirm your password"
             required="required"
           />
           
@@ -64,20 +66,17 @@
         </div> 
          
       </div>
-      
+      <div class="form-footer end">
+      <label>* required</label>
+      <button type="submit" class="btn btn-success">Registrarme</button>
+      <button class="btn btn-danger return" v-on:click="loadCatalogo">Regresar</button>
     </div>
-    <div class="form-prefooter left">
-         <span>*campos obligatorios</span>
-     </div> 
-    <div class="form-footer">
-        
-        <button type="reset" class="cancel_btn">Cancelar</button>
-        <button type="submit" class="btn">Registrarme</button>
-        
     </div>
     
     
   </form>
+  </body>
+</div>
 </template>
 
 <script type="text/javascript">
@@ -118,6 +117,9 @@ export default {
           });
       }
     },
+        loadCatalogo: function () {
+      this.$router.push({ name: "catalogo"});
+    },
   },
 };
 /*var txt_password = document.getElementById("password")
@@ -135,6 +137,9 @@ var txt_confirm_password =document.getElementById("confirm_password")
 
 <style>
 @import url("httpss://fonts.googleapis.com/css?family=Roboto");
+body{
+ 
+}
 .signup-form {
   font-family: "Roboto", sans-serif;
   width: 650px;
@@ -164,9 +169,6 @@ var txt_confirm_password =document.getElementById("confirm_password")
   color: #666;
 }
 
-.form-group {
-  margin-bottom: 20px;
-}
 
 
 .form-body .label-title {
@@ -237,6 +239,8 @@ input[type="file"] {
 }
 .form-footer {
   clear: both;
+  float: right;
+  margin-bottom: 130px;
 }
 
 .signup-form .form-footer {
@@ -249,46 +253,24 @@ input[type="file"] {
   border-top: 1px solid #cccccc;
 }
 
-.form-footer span {
+.form-footer label {
   float: left;
   margin-top: 10px;
+  margin-right: 10px;
   color: #999;
   font-style: italic;
   font-weight: thin;
 }
 
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
+.success{
   background-color: #1bba93;
-  font-size: 17px;
-  border: none;
-  border-radius: 5px;
-  color:white;
-  cursor: pointer;
 }
-.cancel_btn {
-  display: inline-block;
-  padding: 10px 20px;
- 
-  background-color: #C84968;
-  font-size: 17px;
-  border: none;
-  border-radius: 5px;
-  color:white;
-  cursor: pointer;
+.return{
+  margin-left: 20px;
 }
 
 .btn:hover {
-  background-color: #169c7b;
   color: white;
-}
-.cancel_btn:hover {
-  background-color: #82132E;
-  color: white;
-}
-left-btn {
-  text-align: left;
 }
 
 
