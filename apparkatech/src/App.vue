@@ -27,13 +27,12 @@
           <form class="form-inline my-2 my-lg-0">
             <div class="box">
               <div class="container-1">
-                <span class="icon"><i class="fa fa-search"></i></span>
+                 <button class="search-btn" v-on:click="loadInvoice"><span class="icon" ><em class="fa fa-search"></em></span></button>
                 <input
                   type="search"
-                  class="search-bar"
-                  placeholder="Ingresa el número de tu orden de compra"
+                  id="search"
+                  placeholder="Que estás buscando..."
                 />
-                <button class="search-btn" v-on:click="loadInvoice">Search</button>
               </div>
             </div>
           </form>
@@ -270,11 +269,17 @@ footer {
 .container-1 .icon {
   position: absolute;
   top: 50%;
-  margin-left: 17px;
-  margin-top: 17px;
+  margin-left: 10px;
+  margin-top: 30px;
   z-index: 1;
   color: #4f5b66;
 }
+.search-btn{
+  border-color:transparent;
+  background-color:transparent;
+  margin-top:20px
+}
+
 @media only screen and (max-width: 400px){
   footer{
     font-size: smaller;

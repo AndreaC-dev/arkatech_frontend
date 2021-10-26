@@ -68,8 +68,8 @@
       </div>
       <div class="form-footer end">
       <label>* required</label>
-      <button type="submit" class="btn btn-success">Registrarme</button>
       <button class="btn btn-danger return" v-on:click="loadCatalogo">Regresar</button>
+   <button type="submit" class="btn btn-success">Registrarme</button>
     </div>
     </div>
     
@@ -266,12 +266,21 @@ input[type="file"] {
   background-color: #1bba93;
 }
 .return{
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .btn:hover {
   color: white;
 }
+@media only screen and (max-width: 400px){
+.form-body .label-title {
+  color: #1bba93;
+  font-size: 13px;
+  font-weight: bold;
+}
+.form-body .form-input {
+  font-size: 13px;
 
-
+}
+}
 </style> 
