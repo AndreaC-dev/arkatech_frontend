@@ -28,13 +28,8 @@
 
             <div class="product-info">
               <a href="#" class="product-name">{{ product.nombre }}</a>
-              <p class="product-price">${{ product.precioUnitario+product.iva }}</p>
-              <!-- <p class="product-price">$ 133.00</p> -->
+              <p class="product-price"> {{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 2}).format(product.precioUnitario+product.iva )}}</p>
             </div>
-            <!-- Producto contine descuento 
-            <div class="off-info">
-              <h2 class="sm-title">25% off</h2>
-            </div> -->
           </div>
         </div>
       </div>
@@ -157,22 +152,23 @@ img {
 .product-img {
   background: var(--white-light);
   box-shadow: 0 0 20px 10px var(--white-light);
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   margin: 0 auto;
   border-radius: 50%;
-  transition: background 0.5s ease;
+  transition: background 0.3s ease;
   align-items: center;
   justify-content: center;
 }
 .product-img img {
+  align-items: center;
+  justify-content: center;
   width: 150px;
   height: 150px;
   transition: transform 0.6s ease;
 }
 .product-btns {
   display: flex;
-  
   align-items: center;
   justify-content: center;
   margin-top: 1rem;
@@ -292,5 +288,11 @@ img {
   .product-col-left {
     height: 121.5vh;
   }
+}
+@media only screen and (max-width: 400px) {
+ 
+.products{
+  margin-bottom: 170px;
+}
 }
 </style>

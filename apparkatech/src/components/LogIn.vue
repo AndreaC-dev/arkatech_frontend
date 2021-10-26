@@ -1,8 +1,8 @@
 <template>
-
 <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 offset-lg-2 offset-md-1 float-md-center">
+  <div class=jumbotron>
   <body>
-    <div class="login-box">
+    <div class="form-group login-box">      
       <img
         src="https://www.creativefabrica.com/wp-content/uploads/2020/03/08/Monogram-AKT-Logo-Design-Graphics-3386288-1.jpg"
         class="logo"
@@ -22,6 +22,7 @@
       </form>
       </div>
    </body> 
+  </div>
   </div>
   
 
@@ -72,61 +73,50 @@ export default {
 
 <style>
 
-
+.jumbotron{
+  background-color: white;
+}
 .login-box {
-  width: 450px;
-  height: 320px;
   background: rgba(0, 0, 0, 0.719);
   color: #fff;
   border-radius: 10%;
-  transform: translate(-50%, -50%);
-  top: 61%;
-  left: 50%;
-  position:fixed;
+  margin-bottom:100px;
   background-color: #eff0f1;
- 
 }
 
 .login-box .logo {
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  position: fixed;
-  top: -40px;
-  left: calc(50% - 50px);
+
 }
-
-
 .login-box h1 {
-  margin: 0;
-  padding: 0 0 20px;
+  padding:  0 0 30px;
   text-align: center;
   font-size: 26px;
   color: #1bba93
 }
 
 .login-box label {
-  margin: 0;
-  padding: 0;
+  padding: 10px;
   font-size: 20px;
   font-weight: bold;
-  display: block;
   color: #1bba93;
 }
 
 .login-box input {
+  padding: 10px;
   width: 100%;
   margin-bottom: 20px;
 }
 
 .login-box input[type="email"],
 .login-box input[type="password"] {
-  border: none;
+  border: 1px solid #d6d6d6;
   border-bottom: 1px solid #fff;
-  background: transparent;
-  outline: none;
+  background: rgb(255, 255, 255);;
   height: 40px;
-  color: rgb(52, 52, 54);
+  color: rgb(183, 183, 187);
   font-size: 17px;
 }
 

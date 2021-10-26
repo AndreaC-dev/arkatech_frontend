@@ -270,4 +270,12 @@ footer {
   z-index: 1;
   color: #4f5b66;
 }
+@media only screen and (max-width: 400px){
+  footer{
+    font-size: smaller;
+  }
+  .navbar ul li a {
+    font-size:100%
+  }
+}
 </style>

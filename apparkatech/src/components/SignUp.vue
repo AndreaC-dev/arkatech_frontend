@@ -12,7 +12,7 @@
           <input
             type="text"
             class="form-input"
-            placeholder="enter your full name"
+            placeholder="Enter your first name"
             required="required"
             v-model="user.nombre"
           />
@@ -23,7 +23,7 @@
             type="text"
             v-model="user.apellido"
             class="form-input"
-            placeholder="enter your last name"
+            placeholder="Enter your last name"
             required
           />
         </div>
@@ -34,7 +34,7 @@
           type="email"
           v-model="user.email"
           class="form-input"
-          placeholder="enter your email"
+          placeholder="Enter your email"
           required="required"
         />
       </div>
@@ -45,7 +45,7 @@
             type="password"
             v-model="user.password"
             class="form-input"
-            placeholder="enter your password"
+            placeholder="Enter your password"
             required="required"
           />
         </div>
@@ -58,7 +58,7 @@
             type="password"
             class="form-input"
             v-model="user.confirmPassword"
-            placeholder="enter your password again"
+            placeholder="Confirm your password"
             required="required"
           />
         </div>
@@ -219,6 +219,7 @@ input[type="file"] {
 .form-footer {
   clear: both;
   float: right;
+  margin-bottom: 130px;
 }
 
 .signup-form .form-footer {

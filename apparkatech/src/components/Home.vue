@@ -1,6 +1,6 @@
 <template>
      <div class="greetings">
-         <h1>¡Bienvenido <span> {{username}} </span>!</h1>
+         <h1>¡Bienvenido {{username}} !</h1>
      </div>
 
 </template>
@@ -31,8 +31,11 @@ export default {
         font-size: 50px;
         color: #283747;
     }
-    .greetings span{
-        color: crimson;
-        font-weight: bold;
+
+    @media only screen and (max-width: 400px) {
+        .greetings h1{
+        font-size: 2.3rem;
+        color: #283747;
+        }
     }
 </style>

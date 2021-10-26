@@ -1,6 +1,6 @@
 <template>
 <body>
-      <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 offset-lg-2 offset-md-1 float-md-center">
+  <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 offset-lg-2 offset-md-1 float-md-center">
   <div class="container">
     <div class="left-column">
       <img
@@ -32,9 +32,9 @@
         <input type="quantiy" placeholder="1" class="form-control quantity">
       </div>
       <br>
-      <div class="justify-center">
-        <button class="cart-btn" v-on:click="loadLogIn">Comprar</button>
-        <button class="return" v-on:click="loadCatalogo">Regresar</button>
+      <div class="justify-center col-2">
+        <button class="cart-btn me-1" v-on:click="loadLogIn">Comprar</button>
+        <button class="return me-1 me-1" v-on:click="loadCatalogo">Regresar</button>
       </div>
     </div>
       </div>
@@ -162,7 +162,7 @@ body {
 }
  
 .cart-btn {
-  display: inline-block;
+  float: left;
   background-color: #28a745;
   border-radius: 6px;
   font-size: 16px;
@@ -176,7 +176,7 @@ body {
 }
 .return {
   margin-left: 2vh;
-  display: inline-block;
+  float:right;
   background-color: red;
   border-radius: 6px;
   font-size: 16px;
@@ -194,5 +194,45 @@ h3{
   letter-spacing: 1px;
   text-transform: uppercase;
   text-decoration: none;
+}
+@media only screen and (max-width: 400px) {
+  .left-column img.active {
+    height:200px
+    
+  }
+  .product-description p{
+    font-size: 10px !important;
+  }
+  .product-price p{
+    font-size: 15px !important;
+  }
+  .product-description h1{
+    font-size: 30px;
+  }
+  .cart-btn {
+    display: inline;
+  float:right;
+  background-color: #28a745;
+  font-size: 10px;
+  color: #FFFFFF;
+
+  transition: all .5s;
+  text-align: center;
+
+}
+.cart-btn:hover {
+  background-color: #2a6908;
+}
+.return {
+  display: inline;
+  float:left;
+  background-color: red;
+  font-size: 10px;
+  color: #FFFFFF;
+  transition: all .5s;
+}
+.container{
+  margin-bottom: 150px;
+}
 }
 </style>
