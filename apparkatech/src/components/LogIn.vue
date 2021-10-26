@@ -18,7 +18,10 @@
           v-model="user.password"
           placeholder="Enter Password"
         />
-        <input type="submit" value="Iniciar Sesion" />
+        <div class="form-footer end">
+        <button class="btn btn-danger return" v-on:click="loadCatalogo">Regresar</button>
+      <button type="submit" class="btn btn-success">Iniciar Sesion</button>
+           </div>
       </form>
       </div>
    </body> 
@@ -66,6 +69,9 @@ export default {
           if ((error.response.status = "401"))
             alert("Error 401: Credenciales incorrectas");
         });
+    },
+            loadCatalogo: function () {
+      this.$router.push({ name: "catalogo"});
     },
   },
 };
@@ -135,6 +141,18 @@ export default {
   cursor: pointer;
   background: #0ae9b1;
   color: #000;
+}
+.success{
+  background-color: #1bba93;
+
+}
+.return{
+  margin-right: 10px;
+}
+.form-footer {
+  clear: both;
+  float: center;
+
 }
 
 </style>

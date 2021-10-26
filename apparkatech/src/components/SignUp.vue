@@ -40,7 +40,7 @@
       </div>
       <div class="horizontal-group">
         <div class="form-group left">
-          <label for="password" class="label-title">Password *</label>
+          <label for="password" class="label-title">Contraseña *</label>
           <input
             type="password"
             v-model="user.password"
@@ -52,7 +52,7 @@
 
         <div class="form-group right">
           <label for="confirm-password" class="label-title"
-            >Confirm Password *</label
+            >Confirma tu contraseña *</label
           >
           <input
             type="password"
@@ -61,14 +61,19 @@
             placeholder="Confirm your password"
             required="required"
           />
-        </div>
+          
+        
+        </div> 
+         
       </div>
       <div class="form-footer end">
       <label>* required</label>
-      <button type="submit" class="btn btn-success">Registrarme</button>
       <button class="btn btn-danger return" v-on:click="loadCatalogo">Regresar</button>
+   <button type="submit" class="btn btn-success">Registrarme</button>
     </div>
     </div>
+    
+    
   </form>
   </body>
 </div>
@@ -155,6 +160,7 @@ body{
   color: #666;
   padding: 20px 0;
   border-bottom: 1px solid #cccccc;
+  font-weight: bold;
 }
 
 .form-body {
@@ -162,6 +168,7 @@ body{
   margin: 5% 3% 20% 3%;
   color: #666;
 }
+
 
 
 .form-body .label-title {
@@ -195,6 +202,7 @@ body{
   width: 49%;
 }
 
+
 input[type="file"] {
   outline: none;
   cursor: pointer;
@@ -215,7 +223,20 @@ input[type="file"] {
 ::-webkit-input-placeholder {
   color: #d9d9d9;
 }
-
+.form-prefooter {
+  margin-bottom: 10px;
+  
+  display: flex;
+  justify-content:left;
+  clear: both;
+}
+.form-prefooter span {
+  float: left;
+  font-weight: bold;
+  color: #999;
+  font-style: italic;
+  font-weight: thin;
+}
 .form-footer {
   clear: both;
   float: right;
@@ -227,7 +248,8 @@ input[type="file"] {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   padding: 10px 40px;
-  text-align: right;
+  display: flex;
+  justify-content: space-evenly;
   border-top: 1px solid #cccccc;
 }
 
@@ -244,12 +266,21 @@ input[type="file"] {
   background-color: #1bba93;
 }
 .return{
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .btn:hover {
   color: white;
 }
+@media only screen and (max-width: 400px){
+.form-body .label-title {
+  color: #1bba93;
+  font-size: 13px;
+  font-weight: bold;
+}
+.form-body .form-input {
+  font-size: 13px;
 
-
+}
+}
 </style> 

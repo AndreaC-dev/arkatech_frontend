@@ -6,6 +6,7 @@ import SignUp from './components/SignUp.vue'
 import Home from './components/Home.vue'
 import Catalogo from './components/Catalogo.vue'
 import ProductDetail from './components/ProductDetail.vue'
+import Invoice from "./components/Invoice.vue"
 const routes = [{
   path: '/',
   name: 'root',
@@ -30,11 +31,16 @@ path: '/catalogo',
 name: "catalogo",
 component: Catalogo
 },
-  {
-    path: '/product/:id/',
-    name: 'productDetail',
-    component: ProductDetail
-  },
+{
+  path: '/product/:id/',
+  name: 'productDetail',
+  component: ProductDetail
+},
+{
+  path: '/invoice',
+  name: 'invoice',
+  component: Invoice
+},
 ];
 const router = createRouter({
 
