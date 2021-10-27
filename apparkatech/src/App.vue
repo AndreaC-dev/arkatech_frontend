@@ -17,9 +17,6 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" v-on:click="loadHome">Inicio</a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" v-on:click="loadCatalogo">Catálogo</a>
             </li>
@@ -27,7 +24,7 @@
           <form class="form-inline my-2 my-lg-0">
             <div class="box">
               <div class="container-1">
-                 <button class="search-btn" v-on:click="loadInvoice"><span class="icon" ><em class="fa fa-search"></em></span></button>
+                 <button class="search-btn" v-on:click="loadOrder"><span class="icon" ><em class="fa fa-search"></em></span></button>
                 <input
                   type="search"
                   id="search"
@@ -63,13 +60,13 @@
     </div>
     <div class="main-component">
       <router-view
-        v-on:loadHome="loadHome"
         v-on:loadCatalogo="loadCatalogo"
-        v-on:loadInvoice ="loadInvoice"
+        v-on:loadOrder ="loadOrder"
         v-on:completedLogIn="completedLogIn"
         v-on:completedSignUp="completedSignUp"
         v-on:logOut="logOut"
         v-on:loadProductDetail="productDetail"
+        v-on:completedOrder="completedOrder"
       >
       </router-view>
     </div>
@@ -89,12 +86,9 @@ export default {
     Catalogo,
   },
   data: function () {
-    console.log(localStorage.getItem("isAuth"));
-    if (localStorage.getItem("isAuth")) return { is_auth: true };
-    else
-      return {
-        is_auth: false,
-      };
+    return{
+      is_auth: false
+    }
   },
   mounted() {
     let recaptchaScriptQuery = document.createElement("script");
@@ -112,9 +106,10 @@ export default {
   },
   methods: {
     verifyAuth: function () {
+      this.username = localStorage.getItem("username")
       this.is_auth = localStorage.getItem("isAuth") || false;
       if (this.is_auth == false) this.$router.push({ name: "logIn" });
-      else this.$router.push({ name: "home" });
+      else this.$router.push({ name: "catalogo" });
     },
     loadLogIn: function () {
       this.$router.push({ name: "logIn" });
@@ -130,6 +125,17 @@ export default {
       alert("Autenticación Exitosa");
       this.verifyAuth();
     },
+    completedOrder: function(data){
+      alert(`Orden exitosa.\nProducto: ${data.producto.nombre}\nCantidad: ${data.cantidad}\nFecha: ${data.fecha}\nPrecio Total: ${data.precioTotal}`);
+      localStorage.setItem("numero", data.numero);
+      localStorage.setItem("fecha", data.fecha);
+      localStorage.setItem("usuario", data.usuario);
+      localStorage.setItem("producto", data.producto);
+      localStorage.setItem("cantidad", data.cantidad);
+      localStorage.setItem("descuento", data.descuento);
+      localStorage.setItem("precioTotal", data.precioTotal);
+      this.$router.push({name: "order", params: {id_u:data.usuario.id, id_o:data.numero}})
+      },
     loadCatalogo: function () {
       this.$router.push({ name: "catalogo" });
     },
@@ -137,11 +143,11 @@ export default {
       alert("Registro Exitoso");
       this.completedLogIn(data);
     },
-    loadInvoice: function () {
-      this.$router.push({ name: "invoice" });
+    loadOrder: function (localStorage) {
+      this.$router.push({ name: "order" });
     },
-    loadHome: function () {
-      this.$router.push({ name: "home" });
+    loadPreorder: function () {
+      this.$router.push({ name: "preorder" });
     },
     logOut: function () {
       localStorage.clear();
@@ -149,6 +155,7 @@ export default {
       this.verifyAuth();
     },
   },
+
 };
 </script>
 

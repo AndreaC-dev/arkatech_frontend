@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     loadProductDetail: function (id) {
-      console.log(id);
       this.$router.push({ name: "productDetail", params: { id: id } });
     },
   },
