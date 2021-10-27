@@ -4,15 +4,15 @@
     <div class="order-header">
           <h1>Orden de Compra</h1>
       </div>
-      <div class="card flex-row"><img class="logo" src="https://www.creativefabrica.com/wp-content/uploads/2020/03/08/Monogram-AKT-Logo-Design-Graphics-3386288-1.jpg" >
+      <div class="card "><img class="logo" src="https://www.creativefabrica.com/wp-content/uploads/2020/03/08/Monogram-AKT-Logo-Design-Graphics-3386288-1.jpg" >
             <div class="card-body">
             <h4 class="card-title h5 h4-sm">Orden de Compra: {{this.order.numero}}</h4>
             <p class="card-text">fecha: {{this.order.fecha}}</p>
         </div>
     </div>
-      <div class="container">
+      <div class="card">
         <div class="card-columns d-flex justify-content-center">
-            <div class="card">
+            <div class="card me-6">
             <div class="card-block">
                 <div class="card-body">
                     Nombre:     {{this.order.user.nombre}} {{this.order.user.apellido}}<br>
@@ -21,7 +21,7 @@
                 </div>
             </div>
             </div>
-            <div class="card">
+            <div class="card me-6">
             <div class="card-block">
                 <div class="card-body">
                     Correo: {{this.order.user.email}}<br>
@@ -31,9 +31,9 @@
             </div>
         </div>
         </div>
-        <div class="container">
+        <div class="card">
             <div class="card">
-                <table class="table">
+                <table class="table tabla">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
@@ -59,27 +59,23 @@
                 </table>
             </div>      
         </div>    
-        <div class="container last">
-        <div class="card-columns d-flex justify-content-center">
+
+      <div class="card">
+
             <div class="card">
             <div class="card-block">
                 <div class="card-body">
-                    Observaciones:
+                    Subtotal<span class="tab"></span><span class="tab1"></span>{{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 0}).format(this.order.product.precioUnitario*(this.order.cantidad))}}<br>
+                    Descuento<span class="tab"></span>{{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 0}).format(this.order.descuento)}}<br>
+                    IVA<span class="tab"></span><span class="tab"></span><span class="tab2"></span>{{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 0}).format((this.order.product.precioUnitario*(this.order.cantidad))*((this.order.product.iva)/100))}}<br>
+                    Total<span class="tab"></span><span class="tab"></span>{{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 0}).format((this.order.product.precioUnitario*(this.order.cantidad))*(1+(this.order.product.iva)/100))}}<br>                     
                 </div>
-            </div>
-            </div>
-            <div class="card">
-            <div class="card-block">
-                <div class="card-body">
-                    Subtotal    {{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 0}).format(this.order.product.precioUnitario*(this.order.cantidad))}}<br> 
-                    Descuento   {{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 0}).format(this.order.descuento)}}<br>
-                    IVA         {{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 0}).format((this.order.product.precioUnitario*(this.order.cantidad))*((this.order.product.iva)/100))}}<br>  
-                    Total      {{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 0}).format((this.order.product.precioUnitario*(this.order.cantidad))*(1+(this.order.product.iva)/100))}}<br>  
-                </div>
-            </div>
             </div>
         </div>
-        </div>           
+                </div>
+<div class=" last">
+    <button type="button" class="btn btn-info" v-on:click="loadCatalogo">Regresar</button>
+    </div>
         </body>
   </div>
 </template>
@@ -92,7 +88,26 @@ export default {
     return {
         id_u: this.$route.params.id_u,
         id_o: this.$route.params.id_o,
-        order: {},
+        order: {
+            numero: 0,
+            fecha: 0,
+            cantidad: 0,
+            precioTotal: 0,
+            descuento: 0,
+            user: {
+                id: 0,
+                email: "",
+                nombre: "",
+                apellido: ""
+            },
+            product: {
+                id: 0,
+                nombre: "",
+                marca: "",
+                precioUnitario: 0,
+                iva: 0,
+            },
+        },
     };
   },
    mounted() {
@@ -101,6 +116,9 @@ export default {
       document.head.appendChild(recaptchaScript)
     },
   methods: {
+          loadCatalogo: function () {
+      this.$router.push({ name: "catalogo"});
+    },
             verifyToken: async function(){
                 return axios.post(
                         'http://localhost:8000/refresh/',
@@ -130,6 +148,7 @@ export default {
                     {headers: {'Authorization': `Bearer ${token}`}}
                 )
                 .then((result) => {
+                    console.log(result.data)
                     this.order = result.data;
                 })
                 .catch((error) => {
@@ -142,11 +161,16 @@ export default {
                 })
             },
         },
+
      created: async function(){
         this.getOrder()}, 
 };
 </script>
 <style >
+.tabla{
+    font-size: 10px;
+    text-align: center;
+}
 .logo {
   width: 80px;
   height: 80px;
@@ -176,15 +200,29 @@ export default {
 
 }
     .last{
-        margin-bottom: 100px;
+        margin-bottom: 170px;
     }
 
 .important{
 
     background-color: #9D4E89;
 }
-	
+	.btn-info{
+            background-color: #1bba93;
+              float:right;
 
-	
+    }
+	        .tab {
+            display: inline-block;
+            margin-left: 40px;
+        }
+        	        .tab1 {
+            display: inline-block;
+            margin-left: 15px;
+        }
+                	        .tab2 {
+            display: inline-block;
+            margin-left: 10px;
+        }
 
 </style>

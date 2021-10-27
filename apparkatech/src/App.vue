@@ -127,13 +127,7 @@ export default {
     },
     completedOrder: function(data){
       alert(`Orden exitosa.\nProducto: ${data.producto.nombre}\nCantidad: ${data.cantidad}\nFecha: ${data.fecha}\nPrecio Total: ${data.precioTotal}`);
-      localStorage.setItem("numero", data.numero);
-      localStorage.setItem("fecha", data.fecha);
       localStorage.setItem("usuario", data.usuario);
-      localStorage.setItem("producto", data.producto);
-      localStorage.setItem("cantidad", data.cantidad);
-      localStorage.setItem("descuento", data.descuento);
-      localStorage.setItem("precioTotal", data.precioTotal);
       this.$router.push({name: "order", params: {id_u:data.usuario.id, id_o:data.numero}})
       },
     loadCatalogo: function () {
@@ -142,12 +136,6 @@ export default {
     completedSignUp: function (data) {
       alert("Registro Exitoso");
       this.completedLogIn(data);
-    },
-    loadOrder: function (localStorage) {
-      this.$router.push({ name: "order" });
-    },
-    loadPreorder: function () {
-      this.$router.push({ name: "preorder" });
     },
     logOut: function () {
       localStorage.clear();
