@@ -108,12 +108,11 @@ export default {
               token_access: result.data.access,
               token_refresh: result.data.refresh,
             };
-            console.log(dataSignUp);
             this.$emit("completedSignUp", dataSignUp);
           })
           .catch((error) => {
             console.log(error);
-            alert("ErroR en el resgistro.");
+            alert("Error en el resgistro.");
           });
       }
     },
@@ -122,24 +121,11 @@ export default {
     },
   },
 };
-/*var txt_password = document.getElementById("password")
-var txt_confirm_password =document.getElementById("confirm_password")
- function validatePassword(){
-     if(txt_password != txt_confirm_password){
-         confirm_password.setCustomValidity("Passwords Don't Match");
-     } else {
-    confirm_password.setCustomValidity('');
-    }
-     password.onchange = validatePassword;
-     confirm_password.onkeyup = validatePassword;
- }    */
 </script>
 
 <style>
 @import url("httpss://fonts.googleapis.com/css?family=Roboto");
-body{
- 
-}
+
 .signup-form {
   font-family: "Roboto", sans-serif;
   width: 650px;

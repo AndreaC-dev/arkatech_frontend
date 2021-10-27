@@ -22,20 +22,21 @@
       <div class="product-price">
         <div>
           <h3>Precio:</h3>
-          <p class="price"> {{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 2}).format(producto.precioUnitario+producto.iva)}} 
+          <p class="price" name="precio"> {{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 2}).format(producto.precioUnitario*(1+(producto.iva)/100))}} 
           </p>
         <p id="s1"><small>*iva incluido</small></p> 
         </div>
       </div>
+      <form v-on:submit.prevent="processOrder">
       <div class="form-group">
         <h3>Cantidad</h3>
-        <input type="quantiy" placeholder="1" class="form-control quantity">
+        <input type="number" placeholder="Cantidad a comprar" name="cantidad">
       </div>
-      <br>
-      <div class="justify-center col-2">
-        <button class="cart-btn me-1" v-on:click="loadLogIn">Comprar</button>
+      <div class="justify-center col-6">
+        <button type="submit" class="cart-btn">Comprar</button>
         <button class="return me-1 me-1" v-on:click="loadCatalogo">Regresar</button>
       </div>
+      </form>
     </div>
       </div>
   </div>
@@ -44,21 +45,87 @@
 
 <script>
 import axios from "axios";
+import jwt_decode from 'jwt-decode';
 
 export default {
   name: "ProductDetail",
-  data() {
+  data: function() {
     return {
       id: this.$route.params.id,
       producto: {},
+      is_auth: localStorage.getItem("token_refresh"),
+      order: {
+            usuarioId : 0,
+            productoId : 0,
+            precioTotal:0,
+            cantidad: 0
+        },
     };
   },
   methods: {
     loadLogIn: function(){
       this.$router.push({name: "logIn"})
     },
+    loadSignUp: function () {
+      this.$router.push({ name: "signUp" });
+    },
     loadCatalogo: function () {
       this.$router.push({ name: "catalogo"});
+    },
+    processOrder: async function(submitEvent){
+      if(localStorage.getItem("token_refresh") === null || localStorage.getItem("token_access") === null) {
+          this.$emit("logOut");
+          this.$router.push({ name: "home"});
+          return;
+      }
+      await this.verifyToken();
+      let token  = localStorage.getItem("token_access");
+      let userId = jwt_decode(token).user_id.toString();
+      this.order.usuarioId = userId;
+      this.order.productoId = this.id;
+      this.order.cantidad = submitEvent.target.elements.cantidad.value;
+      this.order.precioTotal = (this.producto.precioUnitario*(1+(this.producto.iva)/100))
+      this.order.precioTotal = ((this.producto.precioUnitario*(this.order.cantidad))*(1+(this.producto.iva)/100))
+      axios.post(
+          'http://localhost:8000/order/',
+          this.order,
+          {headers: {'Authorization': `Bearer ${token}`}}
+      )
+      .then((result) => {
+        let dataOrder={
+          numero: result.data.numero,
+          fecha: result.data.fecha,
+          usuario: result.data.user,
+          producto: result.data.product,
+          cantidad: result.data.cantidad,
+          descuento: result.data.descuento,
+          precioTotal: result.data.precioTotal,
+        }
+          this.$emit("completedOrder",dataOrder);
+      })
+      .catch((error) => {
+          console.log("Error");
+          if(error.response.status == "401") {
+              alert("Usted no está autorizado para realizar esta operación.");
+          }
+          else if(error.response.status == "400"){
+              alert("La compra no se pudo procesar correctamente.\nRevise todos los datos e intente de nuevo.");
+          }
+      })
+    },
+    verifyToken: async function(){
+      return axios.post(
+              'http://localhost:8000/refresh/',
+              {refresh: localStorage.getItem("token_refresh")},
+              {headers:{}}
+          )
+          .then((result) => {
+              console.log("New access token");
+              localStorage.setItem("token_access", result.data.access);
+          })
+          .catch((error) => {
+              this.$emit("logOut");
+          })
     },
   },
   created() {
@@ -76,7 +143,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 html,
 body {
@@ -194,6 +260,9 @@ h3{
   letter-spacing: 1px;
   text-transform: uppercase;
   text-decoration: none;
+}
+.registro{
+  margin-left: -30px;
 }
 @media only screen and (max-width: 400px) {
   .left-column img.active {
