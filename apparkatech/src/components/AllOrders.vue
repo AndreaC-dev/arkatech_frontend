@@ -12,7 +12,11 @@
                             <div class="card-body">
                               <p class="card-text">Producto: {{order.product.nombre}}</p>
                               <p class="card-text">Cantidad: {{order.cantidad}}</p>
-                              <div><a href="#" v-on:click="loadOrder(order.user.id,order.numero)" class="btn btn-primary">ver</a>
+                              <div>
+                                <a href="#" v-on:click="loadOrder(order.user.id,order.numero)" class="btn btn-primary">ver</a>
+                                <a href="#" v-on:click="loadUpdateOrder(order.user.id,order.numero)" class="btn btn-primary">Actualizar</a>
+                                <a href="#" v-on:click="loadUpdateOrder()" class="btn btn-primary">Eliminar</a>
+                                
                               </div>
                             </div>             
                             <div class="card-footer">
@@ -48,6 +52,9 @@ export default {
     },
     loadOrder: function (id_u,id_o) {
         this.$router.push({name: "order", params: {id_u:id_u, id_o:id_o}})
+    },
+    loadUpdateOrder: function (id_u,id_o) {
+        this.$router.push({name: "updateorder", params: {id_u:id_u, id_o:id_o}})
     },
     
     getorders: async function () {
