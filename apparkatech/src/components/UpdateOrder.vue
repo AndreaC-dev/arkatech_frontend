@@ -1,88 +1,38 @@
   <template>
   <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 offset-lg-2 offset-md-1 float-md-center">
   <body>
-   <form v-on:submit.prevent="processOrder">
-      <div class="card header">
-    
-          <h1>Orden de Compra</h1>
-      
-      <div class="card "><img class="logo" src="https://www.creativefabrica.com/wp-content/uploads/2020/03/08/Monogram-AKT-Logo-Design-Graphics-3386288-1.jpg" >
-            <div class="card-body">
+   <form>
+      <div class="card header">    
+          <h1>Actualizar orden de Compra</h1>
+      <div class="card "><img class="logo" src="https://www.creativefabrica.com/wp-content/uploads/2020/03/08/Monogram-AKT-Logo-Design-Graphics-3386288-1.jpg" > 
+      </div>        
+      </div>   
+      <div class="card-body">
             <h4 class="card-title h5 h4-sm">Orden de Compra: {{this.order.numero}}</h4>
             <p class="card-text">fecha: {{this.order.fecha}}</p>
-        </div>
-    </div>
-    </div>
-      <div class="card">
-        <div class="card-columns d-flex justify-content-center">
-            <div class="card me-6">
-            <div class="card-block">
-                <div class="card-body">
-                    Nombre:     {{this.order.user.nombre}} {{this.order.user.apellido}}<br>
-                    Despacho:   Tienda<br>
-                    Ciudad:     Bogotá D.C<br>
-                </div>
-            </div>
-            </div>
-            <div class="card me-6">
-            <div class="card-block">
-                <div class="card-body">
-                    Correo: {{this.order.user.email}}<br>
-                    Vendedor: Web
-                </div>
-            </div>
-            </div>
-        </div>
-        </div>
+            Nombre:     {{this.order.user.nombre}} {{this.order.user.apellido}}<br>
+            Despacho:   Tienda<br>
+            Ciudad:     Bogotá D.C<br>
+            Correo: {{this.order.user.email}}<br>
+        </div>  
+        </form>
+                <form v-on:submit.prevent="UpdateOrder">
+        <div class="form-group">
         <div class="card">
-            <div class="card">
-                <table class="table tabla">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">REF.</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">V.Initario</th>
-                    <th scope="col">IVA</th>
-                    <th scope="col">Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>{{this.order.product.id}}</td>
-                    <td><input type="number" name="cantidad"/></td>
-                    <td><select name="produto">{{this.order.product.nombre}}
-                        <option disable selected>Seleccione un producto</option>
-                        <option v-for="product in products" :key="product.id">{{product.nombre}}</option>
-                    </select></td>
-                    <td>{{this.order.product.precioUnitario}}</td>
-                    <td>{{this.order.product.iva}}</td>
-                    <td>{{this.order.precioTotal}}</td>
-                    </tr>
-                </tbody>
-                </table>
-            </div>      
-        </div>    
+            <label> Seleccionar Producto </label>
+            <select v-model="order1.productoId" name="precio">
+                <option disable selected>Seleccione un producto</option>
+                <option v-for="producto in productos" :key="producto.id" :value="producto.id">{{producto.nombre}}  - Precio Unitario {{producto.precioUnitario}}</option></select>            
+            <label> Seleccionar Cantidad </label>
 
-      <div class="card">
-
-            <div class="card">
-            <div class="card-block">
-                <div class="card-body">
-                    Subtotal<span class="tab"></span><span class="tab1"></span>{{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 0}).format(this.order.product.precioUnitario*(this.order.cantidad))}}<br>
-                    Descuento<span class="tab"></span>{{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 0}).format(this.order.descuento)}}<br>
-                    IVA<span class="tab"></span><span class="tab"></span><span class="tab2"></span>{{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 0}).format((this.order.product.precioUnitario*(this.order.cantidad))*((this.order.product.iva)/100))}}<br>
-                    Total<span class="tab"></span><span class="tab"></span>{{new Intl.NumberFormat("es-CO",{style: "currency", currency: "COP", minimumFractionDigits: 0}).format((this.order.product.precioUnitario*(this.order.cantidad))*(1+(this.order.product.iva)/100))}}<br>                     
-                </div>
-            </div>
         </div>
-                </div>
-<div class=" last">
-    <button type="submit" class="btn btn-info" v-on:click="loadOrders">Actualizar</button>
-    <button type="button" class="btn btn-info" v-on:click="UpdateOrder">Regresar</button>
-    </div>
+
+            <input type="number" placeholder="Cantidad a comprar" v-model="order1.cantidad">
+        </div>
+        <div class=" last">
+            <button type="submit" class="btn btn-info">Actualizar</button>
+            <button type="button" class="btn btn-info" v-on:click="loadOrders">Regresar</button>
+        </div>
 </form>
 </body>
 </div>
@@ -99,11 +49,11 @@ export default {
         id_o: this.$route.params.id_o,
         products: [],
         product: 0,
-        order1: {
-            
+        order1: {           
             productoId : 0,
             precioTotal:0,
-            cantidad: 0
+            cantidad: 0,
+            usuarioId:0,
         },
         order: {
             numero: 0,
@@ -151,35 +101,40 @@ export default {
                     })
             },
              UpdateOrder: async function(submitEvent){
+                 this.order1.precioTotal=0;
+                    axios
+                        .get(`http://127.0.0.1:8000/product/${this.order1.productoId}/`)
+                        .then((result) => {
+                            this.order1.precioTotal=result.data.precioUnitario*(this.order.cantidad);
+                            this.sendOrder()
+                            })
+                        .catch((error) => {
+                            console.log(error);
+                            if ((error.response.status = "404"))
+                            alert("Error 404: No hay productos");
+                        });       
+                    
+
+        },
+        sendOrder: async function(){
                     if(localStorage.getItem("token_refresh") === null || localStorage.getItem("token_access") === null) {
                         this.$emit("logOut");
                         this.$router.push({ name: "home"});
                         return;
                     }
+                    
                     await this.verifyToken();
                     let token  = localStorage.getItem("token_access");
+                    this.order1.usuarioId=jwt_decode(token).user_id;
                     let userId = jwt_decode(token).user_id.toString();
-                    //this.order1.usuarioId = userId;
-                    this.order1.productoId = submitEvent.target.elements.producto.value;
-                    this.order1.cantidad = submitEvent.target.elements.cantidad.value;
-                    //this.order1.precioTotal = (this.producto.precioUnitario*(1+(this.producto.iva)/100))
-                    //this.order1.precioTotal = ((this.producto.precioUnitario*(this.order1.cantidad))*(1+(this.producto.iva)/100))
+                    console.log("esta es la odern completa",this.order1);
                     axios.put(
-                        'http://localhosthttp:8000/order/update/${userId}/${id_o}/',
-                        this.order,
+                        `http://localhost:8000/order/update/${userId}/${this.order.numero}/`,
+                        this.order1,
                         {headers: {'Authorization': `Bearer ${token}`}}
                     )
                     .then((result) => {
-                      let dataOrder={
-                        numero: result.data.numero,
-                        fecha: result.data.fecha,
-                        usuario: result.data.user,
-                        producto: result.data.product,
-                        cantidad: result.data.cantidad,
-                        descuento: result.data.descuento,
-                        precioTotal: result.data.precioTotal,
-                      }
-                        this.$emit("completedOrder",dataOrder);
+                        this.$emit("completedOrder");
                     })
                     .catch((error) => {
                         console.log("Error");
@@ -226,7 +181,7 @@ export default {
         .get("http://127.0.0.1:8000/viewproduct/")
           .then((result) => {
             this.products = result.data;
-            console.log(result);
+            console.log(this.products);
           })
           .catch((error) => {
             console.log(error);
