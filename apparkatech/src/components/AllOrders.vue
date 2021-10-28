@@ -13,6 +13,10 @@
                               <p class="card-text">Producto: {{order.product.nombre}}</p>
                               <p class="card-text">Cantidad: {{order.cantidad}}</p>
                               <div><a href="#" v-on:click="loadOrder(order.user.id,order.numero)" class="btn btn-primary">ver</a>
+                              <button  type="button" class="btn btn-outline-success ms-3 me-2 icon" v-on:click="loadUpdate">
+                              title="Edit Order"><i class="bi bi-pencil-square"></i></button>
+                              <button  type="button" class="btn btn-outline-danger me-1 icon" v-on:click="loadDelete(order.user.id,order.numero)"
+                              title="Eliminar"><i class="bi bi-trash-fill"></i></button>
                               </div>
                             </div>             
                             <div class="card-footer">
@@ -49,13 +53,39 @@ export default {
     loadOrder: function (id_u,id_o) {
         this.$router.push({name: "order", params: {id_u:id_u, id_o:id_o}})
     },
+    loadUpdate: function () {
+      this.$router.push({ name: ""});
+    },
+    loadDelete: async function (id_u,id_o) {
+      if(confirm("Do you really want to delete?")){
+        if (localStorage.getItem("token_refresh") === null || localStorage.getItem("token_access") === null) {
+            this.$emit("logOut");
+            return;
+          }
+          await this.verifyToken();
+          let token = localStorage.getItem("token_access");
+          let userId = jwt_decode(token).user_id.toString();
+          axios
+          .delete(`http://localhost:8000/order/remove/${userId}/${id_o}/`, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((result) => {
+            alert(`Orden ${id_o} eliminada`);
+          })
+          .catch((error) => {
+            this.$emit("logOut");
+          });
+    }else{
+            this.$router.push({ name: "allorders" });
+    }
+     window.location.reload();
+    },
     
     getorders: async function () {
       if (
         localStorage.getItem("token_refresh") === null ||
         localStorage.getItem("token_access") === null
       ) {
-        console.log();
         this.$emit("logOut");
         return;
       }
