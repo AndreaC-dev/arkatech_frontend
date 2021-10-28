@@ -21,7 +21,7 @@
               <a class="nav-link" v-on:click="loadCatalogo">Catálogo</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
+          <!-- <form class="form-inline my-2 my-lg-0">
             <div class="box">
               <div class="container-1">
                  <button class="search-btn" v-on:click="loadOrder"><span class="icon" ><em class="fa fa-search"></em></span></button>
@@ -32,7 +32,7 @@
                 />
               </div>
             </div>
-          </form>
+          </form>-->
 
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -50,6 +50,11 @@
               >
             </li>
             <li class="nav-item">
+              <a class="nav-link" v-if="is_auth" v-on:click="loadOrders">
+                Ordenes de Compra</a
+              >
+            </li>
+            <li class="nav-item">
               <a class="nav-link" v-if="is_auth" v-on:click="logOut">
                 Cerrar Sesión</a
               >
@@ -61,12 +66,14 @@
     <div class="main-component">
       <router-view
         v-on:loadCatalogo="loadCatalogo"
-        v-on:loadOrder ="loadOrder"
+        
         v-on:completedLogIn="completedLogIn"
         v-on:completedSignUp="completedSignUp"
         v-on:logOut="logOut"
         v-on:loadProductDetail="productDetail"
         v-on:completedOrder="completedOrder"
+        v-on:loadOrders="loadOrders"
+        v-on:loadOrder="loadOrder"
       >
       </router-view>
     </div>
@@ -137,6 +144,9 @@ export default {
       alert("Registro Exitoso");
       this.completedLogIn(data);
     },
+    loadOrders: function () {
+      this.$router.push({ name: "allorders" });
+    },
     logOut: function () {
       localStorage.clear();
       alert("Sesion Cerrada");
@@ -187,6 +197,7 @@ footer {
   align-items: center;
   justify-content: space-between;
 }
+
 
 .navbar ul li {
   list-style: none;
