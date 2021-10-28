@@ -76,7 +76,7 @@
         </div>
                 </div>
 <div class=" last">
-    <button type="button" class="btn btn-info" v-on:click="loadCatalogo">Regresar</button>
+    <button type="button" class="btn btn-info" v-on:click="loadOrders">Regresar</button>
     </div>
         </body>
   </div>
@@ -118,8 +118,8 @@ export default {
       document.head.appendChild(recaptchaScript)
     },
   methods: {
-          loadCatalogo: function () {
-      this.$router.push({ name: "catalogo"});
+          loadOrders: function () {
+      this.$router.push({ name: "allorders" });
     },
             verifyToken: async function(){
                 return axios.post(
