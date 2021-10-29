@@ -86,7 +86,7 @@ export default {
       this.order.cantidad = submitEvent.target.elements.cantidad.value;
       this.order.precioTotal = ((this.producto.precioUnitario*(this.order.cantidad))*(1+(this.producto.iva)/100))
       axios.post(
-          'http://localhost:8000/order/',
+          'https://arckatech-be.herokuapp.com/order/',
           this.order,
           {headers: {'Authorization': `Bearer ${token}`}}
       )
@@ -114,7 +114,7 @@ export default {
     },
     verifyToken: async function(){
       return axios.post(
-              'http://localhost:8000/refresh/',
+              'https://arckatech-be.herokuapp.com/refresh/',
               {refresh: localStorage.getItem("token_refresh")},
               {headers:{}}
           )
@@ -129,7 +129,7 @@ export default {
   },
   created() {
     axios
-      .get(`http://127.0.0.1:8000/product/${this.id}/`)
+      .get(`https://arckatech-be.herokuapp.com/product/${this.id}/`)
       .then((response) => {
         this.producto = response.data;
       })

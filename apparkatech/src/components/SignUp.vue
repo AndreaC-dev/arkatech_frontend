@@ -101,7 +101,7 @@ export default {
         );
       } else {
         axios
-          .post("http://127.0.0.1:8000/user/", this.user, { headers: {} })
+          .post("https://arckatech-be.herokuapp.com/user/", this.user, { headers: {} })
           .then((result) => {
             let dataSignUp = {
               username: this.user.email,

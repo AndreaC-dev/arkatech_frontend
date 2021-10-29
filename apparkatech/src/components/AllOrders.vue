@@ -68,7 +68,7 @@ export default {
           let token = localStorage.getItem("token_access");
           let userId = jwt_decode(token).user_id.toString();
           axios
-          .delete(`http://localhost:8000/order/remove/${userId}/${id_o}/`, {
+          .delete(`https://arckatech-be.herokuapp.com/order/remove/${userId}/${id_o}/`, {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((result) => {
@@ -97,7 +97,7 @@ export default {
       let userId = jwt_decode(token).user_id.toString();
 
       axios
-        .get(`http://localhost:8000/orders/${userId}/`, {
+        .get(`https://arckatech-be.herokuapp.com/orders/${userId}/`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((result) => {
@@ -113,7 +113,7 @@ export default {
     verifyToken: async function () {
       return axios
         .post(
-          "http://localhost:8000/refresh/",
+          "https://arckatech-be.herokuapp.com/refresh/",
           { refresh: localStorage.getItem("token_refresh") },
           { headers: {} }
         )

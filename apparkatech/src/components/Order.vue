@@ -123,7 +123,7 @@ export default {
     },
             verifyToken: async function(){
                 return axios.post(
-                        'http://localhost:8000/refresh/',
+                        'https://arckatech-be.herokuapp.com/refresh/',
                         {refresh: localStorage.getItem("token_refresh")},
                         {headers:{}}
                     )
@@ -146,7 +146,7 @@ export default {
                 let userId = jwt_decode(token).user_id.toString();
 
                 axios.get(
-                    `http://localhost:8000/order/${userId}/${this.id_o}/`,
+                    `https://arckatech-be.herokuapp.com/order/${userId}/${this.id_o}/`,
                     {headers: {'Authorization': `Bearer ${token}`}}
                 )
                 .then((result) => {

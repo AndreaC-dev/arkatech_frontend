@@ -50,7 +50,7 @@ export default {
     proccesLogInUser: function () {
       axios
         .post(
-          "http://127.0.0.1:8000/login/",
+          "https://arckatech-be.herokuapp.com/login/",
           { email: this.user.username, password: this.user.password },
           { headers: {} }
         )

@@ -91,7 +91,7 @@ export default {
             },
             verifyToken: async function(){
                 return axios.post(
-                        'http://localhost:8000/refresh/',
+                        'https://arckatech-be.herokuapp.com/refresh/',
                         {refresh: localStorage.getItem("token_refresh")},
                         {headers:{}}
                     )
@@ -115,7 +115,7 @@ export default {
                 let userId = jwt_decode(token).user_id.toString();
 
                 axios.get(
-                    `http://localhost:8000/order/${userId}/${this.id_o}/`,
+                    `https://arckatech-be.herokuapp.com/order/${userId}/${this.id_o}/`,
                     {headers: {'Authorization': `Bearer ${token}`}}
                 )
                 .then((result) => {
@@ -137,7 +137,7 @@ export default {
              UpdateOrder: async function(submitEvent){
                  this.order1.precioTotal=0;
                     axios
-                        .get(`http://127.0.0.1:8000/product/${this.order1.productoId}/`)
+                        .get(`https://arckatech-be.herokuapp.com/product/${this.order1.productoId}/`)
                         .then((result) => {
                             this.order1.cantidad = submitEvent.target.elements.cantidad.value;
                             this.order1.precioTotal=((result.data.precioUnitario*this.order1.cantidad)*(1+(result.data.iva)/100));
@@ -166,7 +166,7 @@ export default {
                     let userId = jwt_decode(token).user_id.toString();
                     this.order1.usuarioId=parseInt(userId)
                     axios.put(
-                        `http://localhost:8000/order/update/${userId}/${this.order.numero}/`,
+                        `https://arckatech-be.herokuapp.com/order/update/${userId}/${this.order.numero}/`,
                         this.order1,
                         {headers: {'Authorization': `Bearer ${token}`}}
                     )
@@ -189,7 +189,7 @@ export default {
      created: async function(){
         this.getOrder();
         axios
-        .get("http://127.0.0.1:8000/viewproduct/")
+        .get("https://arckatech-be.herokuapp.com/viewproduct/")
           .then((result) => {
             this.productos = result.data;
             console.log(this.productos);

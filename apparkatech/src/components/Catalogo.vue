@@ -55,7 +55,7 @@ export default {
     },
   created() {
     axios
-      .get("http://127.0.0.1:8000/viewproduct/")
+      .get("https://arckatech-be.herokuapp.com/viewproduct/")
       .then((result) => {
         this.products = result.data;
         console.log(result);
