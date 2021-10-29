@@ -84,7 +84,6 @@ export default {
       this.order.usuarioId = userId;
       this.order.productoId = this.id;
       this.order.cantidad = submitEvent.target.elements.cantidad.value;
-      this.order.precioTotal = (this.producto.precioUnitario*(1+(this.producto.iva)/100))
       this.order.precioTotal = ((this.producto.precioUnitario*(this.order.cantidad))*(1+(this.producto.iva)/100))
       axios.post(
           'http://localhost:8000/order/',

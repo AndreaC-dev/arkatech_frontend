@@ -81,7 +81,7 @@
       Copyright @2021 Arkatech. Todos los derechos reservados
       <br />
       Desarrollado por: Andrea Cardenas, Alejandro Carmona, David Nuñez, Diego
-      Sánchez, José Rondón, Willinton Ascancio, Jimilgton Soto
+      Sánchez, José Rondón, Wilinton Ascanio, Jimilgton Soto
     </footer>
   </div>
 </template>
