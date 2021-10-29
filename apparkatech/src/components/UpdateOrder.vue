@@ -16,24 +16,24 @@
             Correo: {{this.order.user.email}}<br>
         </div>  
         </form>
-                <form v-on:submit.prevent="UpdateOrder">
-        <div class="form-group">
-        <div class="card">
-            <label> Seleccionar Producto </label>
-            <select v-model="order1.productoId" name="precio">
-                <option disable selected>Seleccione un producto</option>
-                <option v-for="producto in productos" :key="producto.id" :value="producto.id">{{producto.nombre}}  - Precio Unitario {{producto.precioUnitario}}</option></select>            
-            <label> Seleccionar Cantidad </label>
-
-        </div>
-
-            <input type="number" placeholder="Cantidad a comprar" v-model="order1.cantidad">
-        </div>
-        <div class=" last">
-            <button type="submit" class="btn btn-info">Actualizar</button>
-            <button type="button" class="btn btn-info" v-on:click="loadOrders">Regresar</button>
-        </div>
-</form>
+        <form v-on:submit.prevent="UpdateOrder">
+          <div class="form-group">
+            <div class="card">
+                <label> Seleccionar Producto </label>
+                <select v-model="order1.productoId" name="precio">
+                    <option disable selected>Seleccione un producto</option>
+                    <option v-for="producto in productos" :key="producto.id" :value="producto.id">{{producto.nombre}}  - Precio Unitario {{producto.precioUnitario}}</option></select>            
+                
+    
+            </div>
+                <label> Seleccionar Cantidad </label>
+                <input type="number" placeholder="Cantidad a comprar" name="cantidad">
+          </div>
+          <div class=" last">
+                <button type="submit" class="btn btn-info">Actualizar</button>
+                <button type="button" class="btn btn-info" v-on:click="loadOrders">Regresar</button>
+          </div>
+        </form>
 </body>
 </div>
 </template>
@@ -44,17 +44,20 @@ export default {
   name: "Order",
   data: function () {
     return {
-        
         id_u: this.$route.params.id_u,
         id_o: this.$route.params.id_o,
-        products: [],
-        product: 0,
-        order1: {           
+        productos: [],
+        producto: 0,
+
+        order1: {  
+            cantidad: 0,         
             productoId : 0,
-            precioTotal:0,
-            cantidad: 0,
             usuarioId:0,
+            precioTotal:0,
+            
+            
         },
+
         order: {
             numero: 0,
             fecha: 0,
@@ -100,53 +103,8 @@ export default {
                         this.$emit("logOut");
                     })
             },
-             UpdateOrder: async function(submitEvent){
-                 this.order1.precioTotal=0;
-                    axios
-                        .get(`http://127.0.0.1:8000/product/${this.order1.productoId}/`)
-                        .then((result) => {
-                            this.order1.precioTotal=result.data.precioUnitario*(this.order.cantidad);
-                            this.sendOrder()
-                            })
-                        .catch((error) => {
-                            console.log(error);
-                            if ((error.response.status = "404"))
-                            alert("Error 404: No hay productos");
-                        });       
-                    
 
-        },
-        sendOrder: async function(){
-                    if(localStorage.getItem("token_refresh") === null || localStorage.getItem("token_access") === null) {
-                        this.$emit("logOut");
-                        this.$router.push({ name: "home"});
-                        return;
-                    }
-                    
-                    await this.verifyToken();
-                    let token  = localStorage.getItem("token_access");
-                    this.order1.usuarioId=jwt_decode(token).user_id;
-                    let userId = jwt_decode(token).user_id.toString();
-                    console.log("esta es la odern completa",this.order1);
-                    axios.put(
-                        `http://localhost:8000/order/update/${userId}/${this.order.numero}/`,
-                        this.order1,
-                        {headers: {'Authorization': `Bearer ${token}`}}
-                    )
-                    .then((result) => {
-                        this.$emit("completedOrder");
-                    })
-                    .catch((error) => {
-                        console.log("Error");
-                        if(error.response.status == "401") {
-                            alert("Usted no está autorizado para realizar esta operación.");
-                        }
-                        else if(error.response.status == "400"){
-                            alert("La compra no se pudo procesar correctamente.\nRevise todos los datos e intente de nuevo.");
-                        }
-                    })
-        },
-        getOrder: async function(){
+            getOrder: async function(){
              if(localStorage.getItem("token_refresh") === null || localStorage.getItem("token_access") === null) {
                     this.$emit("logOut");
                     return;
@@ -173,15 +131,68 @@ export default {
                     }
                 })
             },
+    
+
+
+             UpdateOrder: async function(submitEvent){
+                 this.order1.precioTotal=0;
+                    axios
+                        .get(`http://127.0.0.1:8000/product/${this.order1.productoId}/`)
+                        .then((result) => {
+                            this.order1.cantidad = submitEvent.target.elements.cantidad.value;
+                            this.order1.precioTotal=result.data.precioUnitario*this.order1.cantidad;
+                            
+                            this.sendOrder()
+                            })
+                        .catch((error) => {
+                            console.log(error);
+                            if ((error.response.status = "404"))
+                            alert("Error 404: No hay productos");
+                        });       
+                    
+
         },
 
+        sendOrder: async function(){
+                    if(localStorage.getItem("token_refresh") === null || localStorage.getItem("token_access") === null) {
+                        this.$emit("logOut");
+                        this.$router.push({ name: "home"});
+                        return;
+                    }
+                    
+                    await this.verifyToken();
+                    let token  = localStorage.getItem("token_access");
+                    //this.order1.usuarioId=jwt_decode(token).user_id;
+                    let userId = jwt_decode(token).user_id.toString();
+                    this.order1.usuarioID=userId
+                    console.log("esta es la odern completa",this.order1);
+                    axios.put(
+                        `http://127.0.0.1:8000/order/update/${userId}/${this.order.numero}/`,
+                        this.order1,
+                        {headers: {'Authorization': `Bearer ${token}`}}
+                    )
+                    .then((result) => {
+                        this.$emit("completedOrder");
+                    })
+                    .catch((error) => {
+                        console.log("Error");
+                        if(error.response.status == "401") 
+                            alert("Usted no está autorizado para realizar esta operación.");
+                        
+                        else if(error.response.status == "400"){
+                            alert("La compra no se pudo procesar correctamente.\nRevise todos los datos e intente de nuevo.");
+                        }
+                    })
+        },
+  },
+        
      created: async function(){
-        this.getOrder()
+        this.getOrder();
         axios
         .get("http://127.0.0.1:8000/viewproduct/")
           .then((result) => {
-            this.products = result.data;
-            console.log(this.products);
+            this.productos = result.data;
+            console.log(this.productos);
           })
           .catch((error) => {
             console.log(error);
