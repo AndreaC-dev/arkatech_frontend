@@ -131,7 +131,9 @@ export default {
       localStorage.setItem("token_refresh", data.token_refresh);
       alert("Autenticación Exitosa");
       this.verifyAuth();
+      
     },
+    
     completedOrder: function(data){
       alert(`Orden exitosa.\nProducto: ${data.producto.nombre}\nCantidad: ${data.cantidad}\nFecha: ${data.fecha}\nPrecio Total: ${data.precioTotal}`);
       localStorage.setItem("usuario", data.usuario);

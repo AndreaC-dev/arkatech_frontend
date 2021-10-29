@@ -12,11 +12,11 @@
                             <div class="card-body">
                               <p class="card-text">Producto: {{order.product.nombre}}</p>
                               <p class="card-text">Cantidad: {{order.cantidad}}</p>
-                              <div><a href="#" v-on:click="loadOrder(order.user.id,order.numero)" class="btn btn-primary">ver</a>
+                              <div><a href="#" v-on:click="loadOrder(order.user.id,order.numero)" class="btn btn-outline-primary ms-3 me-2 icon">ver</a>
                               <button  type="button" class="btn btn-outline-success ms-3 me-2 icon" v-on:click="loadUpdate">
                               title="Edit Order"><i class="bi bi-pencil-square"></i></button>
                               <button  type="button" class="btn btn-outline-danger me-1 icon" v-on:click="loadDelete(order.user.id,order.numero)"
-                              title="Eliminar"><i class="bi bi-trash-fill"></i></button>
+                              title="Eliminar">Eliminar<i class="bi bi-trash-fill"></i></button>
                               </div>
                             </div>             
                             <div class="card-footer">
@@ -138,13 +138,14 @@ export default {
     background: var(--gray);
 }
 .containerOrders {
-  display: grid;
+  display:table;
   justify-content: center;
   align-items: center;
   background: var(--gray);
-  margin-block-start: 5%;
+  margin-block-start: 10%;
   margin-block-end: 30%;
   flex-direction: row;
+  border-radius: 10px;
 }
 .lg-title{
     font-family: "Roboto", sans-serif;
