@@ -13,11 +13,12 @@
                               <p class="card-text">Producto: {{order.product.nombre}}</p>
                               <p class="card-text">Cantidad: {{order.cantidad}}</p>
                               <div><a href="#" v-on:click="loadOrder(order.user.id,order.numero)" class="btn btn-outline-primary ms-3 me-2 icon">ver</a>
-                              <button  type="button" class="btn btn-outline-success ms-3 me-2 icon" v-on:click="loadUpdate">
-                              title="Edit Order"><i class="bi bi-pencil-square"></i></button>
-                              <button  type="button" class="btn btn-outline-danger me-1 icon" v-on:click="loadDelete(order.user.id,order.numero)"
-                              title="Eliminar">Eliminar<i class="bi bi-trash-fill"></i></button>
+                              <button  type="button" class="btn btn-outline-success ms-3 me-2 icon" v-on:click="loadUpdate" 
+                              title="Edit Order">Editar<em class="bi bi-pencil-square"></em></button>
+                              <button  type="button" class="btn btn-outline-danger ms-3 me-2 icon" v-on:click="loadDelete(order.user.id,order.numero)"
+                              title="Eliminar">Eliminar<em class="bi bi-trash-fill"></em></button>
                               </div>
+
                             </div>             
                             <div class="card-footer">
                               <small class="text-muted">{{order.fecha}}</small>
@@ -57,7 +58,7 @@ export default {
       this.$router.push({ name: ""});
     },
     loadDelete: async function (id_u,id_o) {
-      if(confirm("Do you really want to delete?")){
+      if(confirm(`Esta seguro de eliminar la orden número ${id_o}?`)){
         if (localStorage.getItem("token_refresh") === null || localStorage.getItem("token_access") === null) {
             this.$emit("logOut");
             return;
@@ -171,5 +172,7 @@ export default {
   padding: 12px 30px;
   transition: all .5s;
 }
-
+.btn{
+  min-width: 80px;
+}
 </style>
