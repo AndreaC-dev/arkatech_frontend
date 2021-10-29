@@ -12,11 +12,6 @@
                             <div class="card-body">
                               <p class="card-text">Producto: {{order.product.nombre}}</p>
                               <p class="card-text">Cantidad: {{order.cantidad}}</p>
-                              <div>
-                                <a href="#" v-on:click="loadOrder(order.user.id,order.numero)" class="btn btn-primary">ver</a>
-                                <a href="#" v-on:click="loadUpdateOrder(order.user.id,order.numero)" class="btn btn-primary">Actualizar</a>
-                                <a href="#" v-on:click="loadUpdateOrder()" class="btn btn-primary">Eliminar</a>
-                                
                               <div><a href="#" v-on:click="loadOrder(order.user.id,order.numero)" class="btn btn-outline-primary ms-3 me-2 icon">ver</a>
                               <button  type="button" class="btn btn-outline-success ms-3 me-2 icon" v-on:click="loadUpdateOrder(order.user.id,order.numero)" 
                               title="Edit Order">Editar<em class="bi bi-pencil-square"></em></button>
@@ -36,6 +31,7 @@
                 </div>
             </div> 
        </div>    
+ 
     </body>
 </template>
 
