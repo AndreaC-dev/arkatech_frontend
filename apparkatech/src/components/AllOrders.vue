@@ -13,7 +13,7 @@
                               <p class="card-text">Producto: {{order.product.nombre}}</p>
                               <p class="card-text">Cantidad: {{order.cantidad}}</p>
                               <div><a href="#" v-on:click="loadOrder(order.user.id,order.numero)" class="btn btn-outline-primary ms-3 me-2 icon">ver</a>
-                              <button  type="button" class="btn btn-outline-success ms-3 me-2 icon" v-on:click="loadUpdate" 
+                              <button  type="button" class="btn btn-outline-success ms-3 me-2 icon" v-on:click="loadUpdateOrder(order.user.id,order.numero)" 
                               title="Edit Order">Editar<em class="bi bi-pencil-square"></em></button>
                               <button  type="button" class="btn btn-outline-danger ms-3 me-2 icon" v-on:click="loadDelete(order.user.id,order.numero)"
                               title="Eliminar">Eliminar<em class="bi bi-trash-fill"></em></button>
@@ -31,6 +31,7 @@
                 </div>
             </div> 
        </div>    
+ 
     </body>
 </template>
 
@@ -54,8 +55,8 @@ export default {
     loadOrder: function (id_u,id_o) {
         this.$router.push({name: "order", params: {id_u:id_u, id_o:id_o}})
     },
-    loadUpdate: function () {
-      this.$router.push({ name: ""});
+    loadUpdateOrder: function (id_u,id_o) {
+        this.$router.push({name: "updateorder", params: {id_u:id_u, id_o:id_o}})
     },
     loadDelete: async function (id_u,id_o) {
       if(confirm(`Esta seguro de eliminar la orden número ${id_o}?`)){

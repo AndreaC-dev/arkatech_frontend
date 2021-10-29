@@ -6,6 +6,7 @@ import Catalogo from './components/Catalogo.vue'
 import ProductDetail from './components/ProductDetail.vue'
 import Order from "./components/Order.vue"
 import AllOrders from "./components/AllOrders.vue"
+import UpdateOrder from "./components/UpdateOrder.vue"
 
 const routes = [{
   path: '/',
@@ -45,6 +46,11 @@ component: Catalogo
   path: '/allorders/',
   name: 'allorders',
   component: AllOrders
+},
+{
+  path: '/order/update/:id_u/:id_o/',
+  name: 'updateorder',
+  component: UpdateOrder
 }
 ];
 const router = createRouter({
