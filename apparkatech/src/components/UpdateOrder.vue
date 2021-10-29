@@ -140,7 +140,7 @@ export default {
                         .get(`http://127.0.0.1:8000/product/${this.order1.productoId}/`)
                         .then((result) => {
                             this.order1.cantidad = submitEvent.target.elements.cantidad.value;
-                            this.order1.precioTotal=((result.data.precioUnitario*this.order1.cantidad)*(1+(result.data.iva)));
+                            this.order1.precioTotal=((result.data.precioUnitario*this.order1.cantidad)*(1+(result.data.iva)/100));
                             
                             this.sendOrder()
                             })
