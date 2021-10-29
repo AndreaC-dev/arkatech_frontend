@@ -32,9 +32,9 @@
         <h3>Cantidad</h3>
         <input type="number" placeholder="Cantidad a comprar" name="cantidad">
       </div>
-      <div class="justify-center col-6">
-        <button type="submit" class="cart-btn">Comprar</button>
-        <button class="return me-1 me-1" v-on:click="loadCatalogo">Regresar</button>
+      <div class="justify-center">
+        <button type="submit" class="btn btn-success">Comprar</button>
+        <button class="btn btn-danger" v-on:click="loadCatalogo">Regresar</button>
       </div>
       </form>
     </div>
@@ -228,14 +228,7 @@ body {
 }
  
 .cart-btn {
-  float: left;
   background-color: #28a745;
-  border-radius: 6px;
-  font-size: 16px;
-  color: #FFFFFF;
-  text-decoration: none;
-  padding: 12px 30px;
-  transition: all .5s;
 }
 .cart-btn:hover {
   background-color: #2a6908;

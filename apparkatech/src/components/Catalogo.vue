@@ -19,10 +19,6 @@
                   Ver Producto
                   <span><i class="fas fa-plus"></i></span>
                 </button>
-                <button type="button" class="btn-buy">
-                  Comprar
-                  <span><i class="fas fa-shopping-cart"></i></span>
-                </button>
               </div>
             </div>
 
