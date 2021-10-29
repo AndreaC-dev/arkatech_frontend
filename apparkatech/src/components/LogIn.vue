@@ -20,7 +20,7 @@
         />
         <div class="form-footer end">
         <button class="btn btn-danger return" v-on:click="loadCatalogo">Regresar</button>
-      <button type="submit" class="btn btn-success">Iniciar Sesion</button>
+      <button type="submit" class="btn btn-success boton">Iniciar Sesion</button>
            </div>
       </form>
       </div>
@@ -77,7 +77,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
 .jumbotron{
   background-color: white;
@@ -100,14 +100,14 @@ export default {
   padding:  0 0 30px;
   text-align: center;
   font-size: 26px;
-  color: #1bba93
+  color: #6a4892
 }
 
 .login-box label {
   padding: 10px;
   font-size: 20px;
   font-weight: bold;
-  color: #1bba93;
+  color: #6a4892;
 }
 
 .login-box input {
@@ -130,7 +130,7 @@ export default {
   border: none;
   outline: none;
   height: 40px;
-  background: #1bba93;
+  background: #6a4892;
   color: #fff;
   font-size: 20px;
   border-radius: 20px;
@@ -139,15 +139,15 @@ export default {
 
 .login-box input[type="submit"]:hover {
   cursor: pointer;
-  background: #0ae9b1;
-  color: #000;
+  background: #A9BE91;
+  color: white;
 }
-.success{
-  background-color: #1bba93;
+.boton {
+  background-color: #709248;
+}
 
-}
 .return{
-  margin-right: 10px;
+  background-color:#92484B;
 }
 .form-footer {
   clear: both;

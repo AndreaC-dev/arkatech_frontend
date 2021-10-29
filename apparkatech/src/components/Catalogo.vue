@@ -81,6 +81,7 @@ body {
   font-family: "Quicksand", sans-serif;
   align-items: center;
   justify-content: center;
+  margin-bottom: 5%;
 }
 
 /* Utility stylings */
@@ -184,7 +185,7 @@ img {
   transition: all 0.6s ease;
 }
 .btn-view {
-  background: black;
+  background: white;
   color: white;
 }
 .btn-view:hover {

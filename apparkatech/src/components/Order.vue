@@ -181,7 +181,8 @@ export default {
 }
 .header {
     text-align: center;
-    background-color: #1bba93;
+    background-color: #977FB3;
+        margin-top: 2%;
     border-color:gray;
 }
 .header h1{
@@ -202,7 +203,7 @@ export default {
     background-color: #9D4E89;
 }
 	.btn-info{
-            background-color: #1bba93;
+            background-color: #92484B;
               float:right;
 
     }

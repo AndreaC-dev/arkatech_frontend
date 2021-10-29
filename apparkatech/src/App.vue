@@ -14,30 +14,16 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" v-on:click="loadCatalogo">Catálogo</a>
+              <a class="nav-link boton" v-on:click="loadCatalogo">Catálogo</a>
             </li>
           </ul>
-          <!-- <form class="form-inline my-2 my-lg-0">
-            <div class="box">
-              <div class="container-1">
-                 <button class="search-btn" v-on:click="loadOrder"><span class="icon" ><em class="fa fa-search"></em></span></button>
-                <input
-                  type="search"
-                  id="search"
-                  placeholder="Que estás buscando..."
-                />
-              </div>
-            </div>
-          </form>-->
-
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a
-                class="nav-link"
+                class="nav-link boton"
                 id="login"
                 v-if="!is_auth"
                 v-on:click="loadLogIn"
@@ -45,17 +31,17 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" v-if="!is_auth" v-on:click="loadSignUp"
+              <a class="nav-link boton" v-if="!is_auth" v-on:click="loadSignUp"
                 >Registrarse</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" v-if="is_auth" v-on:click="loadOrders">
+              <a class="nav-link boton" v-if="is_auth" v-on:click="loadOrders">
                 Ordenes de Compra</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" v-if="is_auth" v-on:click="logOut">
+              <a class="nav-link boton" v-if="is_auth" v-on:click="logOut">
                 Cerrar Sesión</a
               >
             </li>
@@ -164,7 +150,7 @@ export default {
 :root {
   --white-light: rgba(255, 255, 255, 0.5);
   --alice-blue: #f8f9fa;
-  --carribean-green: #40c9a2;
+  --carribean-green: #6a4892;
   --gray: #ededed;
 }
 
@@ -178,7 +164,7 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #1e917afd;
+  background-color: #6a4892;
   color: white;
   text-align: center;
   font-family: sans-serif;
@@ -188,7 +174,8 @@ footer {
 .container_navbar {
   width: 100%;
   height: auto;
-  background-color: #1e917afd;
+  background-color: #6a4892;
+  color:white;
   position: relative;
 }
 
@@ -198,14 +185,21 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color:white;
 }
-
 
 .navbar ul li {
   list-style: none;
   display: inline-block;
   margin: 0 20px;
   position: relative;
+  color:white;
+}
+.navbar-light .navbar-nav .nav-link {
+  color:white;
+}
+#login {
+  color:white;
 }
 
 .navbar ul li a {
@@ -219,7 +213,8 @@ footer {
   content: "";
   height: 3px;
   width: 0%;
-  background: yellowgreen;
+  color:white;
+  background: white;
   position: absolute;
   left: 0;
   bottom: -12px;
@@ -228,6 +223,7 @@ footer {
 
 .navbar ul li:hover::before {
   width: 100%;
+  color:white;
 }
 
 .container-1 {
@@ -244,7 +240,7 @@ footer {
   border: none;
   font-size: 10pt;
   float: left;
-  color: #020508;
+  color: white;
   border-radius: 20px;
   padding-left: 45px;
   -webkit-border-radius: 5px;

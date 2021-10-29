@@ -33,8 +33,8 @@
         <input type="number" placeholder="Cantidad a comprar" name="cantidad">
       </div>
       <div class="justify-center">
-        <button type="submit" class="btn btn-success">Comprar</button>
-        <button class="btn btn-danger" v-on:click="loadCatalogo">Regresar</button>
+        <button type="submit" class="btn btn-success boton">Comprar</button>
+        <button class="btn btn-danger return" v-on:click="loadCatalogo">Regresar</button>
       </div>
       </form>
     </div>
@@ -135,7 +135,7 @@ export default {
       })
       .catch((error) => {
         console.log(error);
-        if ((error.response.status = "404"))
+        if ((error.response.status == "404"))
           alert("Error 404: No hay productos");
       });
   },
@@ -226,25 +226,15 @@ body {
   align-items: column;
 }
  
-.cart-btn {
-  background-color: #28a745;
+.boton {
+  background-color: #709248;
 }
-.cart-btn:hover {
-  background-color: #2a6908;
-}
+
 .return {
-  margin-left: 2vh;
-  float:right;
-  background-color: red;
-  border-radius: 6px;
-  font-size: 16px;
-  color: #FFFFFF;
-  text-decoration: none;
-  padding: 12px 30px;
-  transition: all .5s;
+  background-color: #92484B;
 }
 .return:hover {
-  background-color: #bd1913;
+  background-color: #92484B;
 }
 h3{
   font-size: 12px;
@@ -287,7 +277,7 @@ h3{
 .return {
   display: inline;
   float:left;
-  background-color: red;
+  background-color: #92484B;
   font-size: 10px;
   color: #FFFFFF;
   transition: all .5s;

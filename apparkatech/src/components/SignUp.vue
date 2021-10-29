@@ -69,7 +69,7 @@
       <div class="form-footer end">
       <label>* required</label>
       <button class="btn btn-danger return" v-on:click="loadCatalogo">Regresar</button>
-   <button type="submit" class="btn btn-success">Registrarme</button>
+   <button type="submit" class="btn btn-success boton">Registrarme</button>
     </div>
     </div>
     
@@ -123,7 +123,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import url("httpss://fonts.googleapis.com/css?family=Roboto");
 
 .signup-form {
@@ -158,7 +158,7 @@ export default {
 
 
 .form-body .label-title {
-  color: #1bba93;
+  color: #6a4892;
   font-size: 17px;
   font-weight: bold;
 }
@@ -198,12 +198,15 @@ input[type="file"] {
 #range-label {
   width: 15%;
   padding: 5px;
-  background-color: #1bba93;
+  background-color: #6a4892;
   color: white;
   border-radius: 5px;
   font-size: 17px;
   position: relative;
   top: -8px;
+}
+.boton {
+  background-color: #709248;
 }
 
 ::-webkit-input-placeholder {
@@ -248,11 +251,9 @@ input[type="file"] {
   font-weight: thin;
 }
 
-.success{
-  background-color: #1bba93;
-}
 .return{
   margin-left: 10px;
+  background-color:#92484B;
 }
 
 .btn:hover {
@@ -260,7 +261,7 @@ input[type="file"] {
 }
 @media only screen and (max-width: 400px){
 .form-body .label-title {
-  color: #1bba93;
+  color: #6a4892;
   font-size: 13px;
   font-weight: bold;
 }

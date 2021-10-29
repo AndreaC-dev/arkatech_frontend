@@ -30,8 +30,8 @@
                 <input type="number" placeholder="Cantidad a comprar" name="cantidad">
           </div>
           <div class=" last">
-                <button type="submit" class="btn btn-info">Actualizar</button>
-                <button type="button" class="btn btn-info" v-on:click="loadOrders">Regresar</button>
+                <button type="submit" class="btn btn-info boton">Actualizar</button>
+                <button type="button" class="btn btn-info return" v-on:click="loadOrders">Regresar</button>
           </div>
         </form>
 </body>
@@ -202,7 +202,7 @@ export default {
         },
 };
 </script>
-<style >
+<style scoped>
 .tabla{
     font-size: 10px;
     text-align: center;
@@ -213,13 +213,22 @@ export default {
   border-radius: 50%;
   left: calc(50% - 50px);
 }
+.boton {
+  background-color: #709248;
+}
+.return{
+      background-color: #92484B;
+}
+
 .header {
     text-align: center;
-    background-color: #1bba93;
+    background-color: #977FB3;
+    color:white;
+    margin-top: 2%;
     border-color:gray;
 }
 .header h1{
-
+    
     font-size: 30px;
     text-align: center;
     color: white;
@@ -233,10 +242,9 @@ export default {
 
 .important{
 
-    background-color: #9D4E89;
+    background-color: #6a4892;
 }
 	.btn-info{
-            background-color: #1bba93;
               float:right;
 
     }

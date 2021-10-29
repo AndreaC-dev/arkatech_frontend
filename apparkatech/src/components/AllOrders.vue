@@ -1,5 +1,4 @@
 <template>
-    <body>
         <div id="containergrande" class="row row-cols-1 row-cols-md-7 g-7"> 
             <div class="containerOrders">
                 <h1 class="lg-title">Ordenes de Compra</h1>
@@ -26,13 +25,11 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <button id="return" class="return me-1 me-1" v-on:click="loadCatalogo">Regresar</button>
+                <div class="col-md-12 text-center">
+                    <button id="return" class="btn btn-danger return" v-on:click="loadCatalogo">Regresar</button>
                 </div>
             </div> 
        </div>    
- 
-    </body>
 </template>
 
 <script>
@@ -144,14 +141,13 @@ export default {
   justify-content: center;
   align-items: center;
   background: var(--gray);
-  margin-block-start: 10%;
-  margin-block-end: 30%;
+  margin-block-start: 1%;
+  margin-block-end: 10%;
   flex-direction: row;
   border-radius: 10px;
 }
 .lg-title{
     font-family: "Roboto", sans-serif;
-    padding: 0.6rem 0;
     text-transform: capitalize;
     text-align: center;
     
@@ -162,18 +158,20 @@ export default {
 .card-footer{
     text-align: center;
 }
-.return {
-  margin-left: 2vh;
-  float:right;
-  background-color: red;
-  border-radius: 6px;
-  font-size: 16px;
-  color: #FFFFFF;
-  text-decoration: none;
-  padding: 12px 30px;
-  transition: all .5s;
-}
+
 .btn{
   min-width: 80px;
+    float:center;
 }
+.return {
+  background-color: #92484B;
+}
+
+@media only screen and (max-width: 400px) {
+  .containerOrders {
+  margin-block-end: 30%;
+    
+  }
+}
+
 </style>
