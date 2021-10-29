@@ -12,8 +12,13 @@
                             <div class="card-body">
                               <p class="card-text">Producto: {{order.product.nombre}}</p>
                               <p class="card-text">Cantidad: {{order.cantidad}}</p>
-                              <div><a href="#" v-on:click="loadOrder(order.user.id,order.numero)" class="btn btn-primary">ver</a>
+                              <div><a href="#" v-on:click="loadOrder(order.user.id,order.numero)" class="btn btn-outline-primary ms-3 me-2 icon">ver</a>
+                              <button  type="button" class="btn btn-outline-success ms-3 me-2 icon" v-on:click="loadUpdate" 
+                              title="Edit Order">Editar<em class="bi bi-pencil-square"></em></button>
+                              <button  type="button" class="btn btn-outline-danger ms-3 me-2 icon" v-on:click="loadDelete(order.user.id,order.numero)"
+                              title="Eliminar">Eliminar<em class="bi bi-trash-fill"></em></button>
                               </div>
+
                             </div>             
                             <div class="card-footer">
                               <small class="text-muted">{{order.fecha}}</small>
@@ -49,13 +54,39 @@ export default {
     loadOrder: function (id_u,id_o) {
         this.$router.push({name: "order", params: {id_u:id_u, id_o:id_o}})
     },
+    loadUpdate: function () {
+      this.$router.push({ name: ""});
+    },
+    loadDelete: async function (id_u,id_o) {
+      if(confirm(`Esta seguro de eliminar la orden número ${id_o}?`)){
+        if (localStorage.getItem("token_refresh") === null || localStorage.getItem("token_access") === null) {
+            this.$emit("logOut");
+            return;
+          }
+          await this.verifyToken();
+          let token = localStorage.getItem("token_access");
+          let userId = jwt_decode(token).user_id.toString();
+          axios
+          .delete(`http://localhost:8000/order/remove/${userId}/${id_o}/`, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((result) => {
+            alert(`Orden ${id_o} eliminada`);
+          })
+          .catch((error) => {
+            this.$emit("logOut");
+          });
+    }else{
+            this.$router.push({ name: "allorders" });
+    }
+     window.location.reload();
+    },
     
     getorders: async function () {
       if (
         localStorage.getItem("token_refresh") === null ||
         localStorage.getItem("token_access") === null
       ) {
-        console.log();
         this.$emit("logOut");
         return;
       }
@@ -108,13 +139,14 @@ export default {
     background: var(--gray);
 }
 .containerOrders {
-  display: grid;
+  display:table;
   justify-content: center;
   align-items: center;
   background: var(--gray);
-  margin-block-start: 5%;
+  margin-block-start: 10%;
   margin-block-end: 30%;
   flex-direction: row;
+  border-radius: 10px;
 }
 .lg-title{
     font-family: "Roboto", sans-serif;
@@ -140,5 +172,7 @@ export default {
   padding: 12px 30px;
   transition: all .5s;
 }
-
+.btn{
+  min-width: 80px;
+}
 </style>
