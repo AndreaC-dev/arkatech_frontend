@@ -140,7 +140,7 @@ export default {
                         .get(`http://127.0.0.1:8000/product/${this.order1.productoId}/`)
                         .then((result) => {
                             this.order1.cantidad = submitEvent.target.elements.cantidad.value;
-                            this.order1.precioTotal=result.data.precioUnitario*this.order1.cantidad;
+                            this.order1.precioTotal=((result.data.precioUnitario*this.order1.cantidad)*(1+(result.data.iva)));
                             
                             this.sendOrder()
                             })
@@ -164,18 +164,18 @@ export default {
                     let token  = localStorage.getItem("token_access");
                     //this.order1.usuarioId=jwt_decode(token).user_id;
                     let userId = jwt_decode(token).user_id.toString();
-                    this.order1.usuarioID=userId
-                    console.log("esta es la odern completa",this.order1);
+                    this.order1.usuarioId=parseInt(userId)
                     axios.put(
-                        `http://127.0.0.1:8000/order/update/${userId}/${this.order.numero}/`,
+                        `http://localhost:8000/order/update/${userId}/${this.order.numero}/`,
                         this.order1,
                         {headers: {'Authorization': `Bearer ${token}`}}
                     )
                     .then((result) => {
-                        this.$emit("completedOrder");
+                        console.log(result);
+                        this.$router.push({name: "order", params: {id_u:result.data.user.id, id_o:result.data.numero}})
                     })
                     .catch((error) => {
-                        console.log("Error");
+                        console.log("Error",error.response);
                         if(error.response.status == "401") 
                             alert("Usted no está autorizado para realizar esta operación.");
                         
